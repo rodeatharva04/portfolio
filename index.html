@@ -28,17 +28,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg); color: #ffffff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* --- Elegant Scrollbar --- */
+        /* --- Custom Scrollbar --- */
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* --- Card Logic --- */
+        /* --- Global Card Logic --- */
         .comp-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 24px;
             transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative;
@@ -46,9 +46,9 @@
             display: flex;
             flex-direction: column;
         }
-        @media (min-width: 768px) { .comp-card { padding: 40px; } }
+        @media (min-width: 768px) { .comp-card { padding: 40px; border-radius: 28px; } }
         
-        /* Static vs Jump */
+        /* Interactive States */
         .static-card:hover { transform: none !important; border-color: rgba(59, 130, 246, 0.3); }
         .jump-card:hover { transform: translateY(-8px); border-color: rgba(59, 130, 246, 0.3); }
 
@@ -59,44 +59,44 @@
         }
         .comp-card:hover::before { opacity: 1; }
 
-        /* --- Typography & Hero --- */
-        .hero-title { font-size: clamp(2.5rem, 12vw, 10rem); font-weight: 900; line-height: 0.8; letter-spacing: -0.05em; text-transform: uppercase; text-align: center; }
+        /* --- Typography --- */
+        .hero-title { font-size: clamp(2.5rem, 10vw, 9rem); font-weight: 900; line-height: 0.8; letter-spacing: -0.05em; text-transform: uppercase; text-align: center; }
         .title-fill { color: white; display: block; animation: slideUp 1s forwards; }
         .title-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); display: block; background: linear-gradient(180deg, #3b82f6, #1d4ed8); -webkit-background-clip: text; animation: slideUp 1.2s forwards; }
-        @keyframes slideUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 
         /* --- LeetCode UI --- */
         .lc-circle {
-            position: relative; width: 130px; height: 130px; border-radius: 50%;
+            position: relative; width: 120px; height: 120px; border-radius: 50%;
             background: conic-gradient(var(--lc-easy) 0deg var(--easy-deg), var(--lc-med) var(--easy-deg) var(--med-deg), var(--lc-hard) var(--med-deg) var(--hard-deg), var(--lc-empty) var(--hard-deg) 360deg);
             display: flex; align-items: center; justify-content: center;
         }
-        .lc-circle::after { content: ""; position: absolute; width: 110px; height: 110px; background: #0d0d0d; border-radius: 50%; }
+        @media (min-width: 768px) { .lc-circle { width: 140px; height: 140px; } }
+        .lc-circle::after { content: ""; position: absolute; width: 82%; height: 82%; background: #0d0d0d; border-radius: 50%; }
         .lc-circle-inner { position: relative; z-index: 10; text-align: center; }
+        
         .lc-bar-container { height: 6px; background: #262626; border-radius: 10px; position: relative; width: 100%; overflow: hidden; }
         .lc-bar-fill { height: 100%; border-radius: 10px; transition: width 1.5s ease-in-out; }
 
         /* --- Global Components --- */
-        .tag-pill { padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 10px; font-weight: 800; text-transform: uppercase; background: rgba(255,255,255,0.03); color: var(--accent); }
-        .recursion-node { border: 1px solid var(--accent); background: rgba(59, 130, 246, 0.15) !important; color: white !important; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
-        .live-highlight { border: 1px solid var(--accent); background: rgba(59, 130, 246, 0.2) !important; color: white !important; }
-        .btn-elegant { background: var(--accent); color: white; padding: 12px 24px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; }
-        .btn-elegant:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(59, 130, 246, 0.6); }
-
+        .tag-pill { padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 9px; font-weight: 800; text-transform: uppercase; background: rgba(255,255,255,0.03); color: var(--accent); }
+        .recursion-node { border: 1px solid var(--accent); background: rgba(59, 130, 246, 0.15) !important; color: white !important; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+        .live-highlight { border: 1px solid var(--accent); background: rgba(59, 130, 246, 0.15) !important; color: white !important; }
+        .btn-elegant { background: var(--accent); color: white; padding: 12px 24px; border-radius: 10px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        
         .stack-box { display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid var(--border); transition: 0.3s; }
-        .stack-box:hover { border-color: var(--accent); }
 
-        .swiper-button-next, .swiper-button-prev { opacity: 0; transition: 0.3s; color: white !important; background: rgba(0,0,0,0.8); width: 40px !important; height: 40px !important; border-radius: 50%; }
+        .swiper-button-next, .swiper-button-prev { opacity: 0; transition: 0.3s; color: white !important; background: rgba(0,0,0,0.8); width: 35px !important; height: 35px !important; border-radius: 50%; }
         .group:hover .swiper-button-next, .group:hover .swiper-button-prev { opacity: 1; }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION (PC + Mobile Friendly) -->
+    <!-- NAV (ALL SECTIONS) -->
     <nav class="fixed top-0 w-full z-[2000] border-b border-white/5 bg-black/80 backdrop-blur-xl">
-        <div class="max-w-[1440px] mx-auto px-6 md:px-12 py-5 flex justify-between items-center">
-            <div class="text-xl font-black tracking-tighter uppercase">Atharva <span class="text-blue-500">Rode.</span></div>
-            <div class="hidden xl:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
+        <div class="max-w-[1440px] mx-auto px-4 md:px-12 py-4 flex justify-between items-center">
+            <div class="text-lg md:text-xl font-black tracking-tighter uppercase">Atharva <span class="text-blue-500">Rode.</span></div>
+            <div class="hidden xl:flex gap-6 text-[9px] font-black uppercase tracking-[0.2em] text-zinc-500">
                 <a href="#expertise" class="hover:text-white transition">Expertise</a>
                 <a href="#stats" class="hover:text-white transition">Stats</a>
                 <a href="#projects" class="hover:text-white transition">Projects</a>
@@ -104,22 +104,22 @@
                 <a href="#certificates" class="hover:text-white transition">Credentials</a>
                 <a href="#academic" class="hover:text-white transition">Academic</a>
             </div>
-            <a href="YOUR_RESUME_URL" target="_blank" class="bg-zinc-900 border border-white/10 px-6 py-2 rounded text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition">Resume <i class="fas fa-download ml-2"></i></a>
+            <a href="YOUR_RESUME_URL" target="_blank" class="bg-zinc-900 border border-white/10 px-4 py-2 rounded text-[9px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">Resume</a>
         </div>
     </nav>
 
     <!-- HERO -->
-    <section class="min-h-screen flex flex-col justify-center items-center px-8 relative pt-20">
+    <section class="min-h-screen flex flex-col justify-center items-center px-6 md:px-8 relative pt-20">
         <div class="max-w-7xl w-full z-10 text-center">
-            <span class="text-blue-500 font-black text-[11px] uppercase tracking-[0.6em] mb-10 block" data-aos="fade-up">Software Engineer // Performance Oriented</span>
-            <h1 class="hero-title mb-16">
+            <span class="text-blue-500 font-black text-[9px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.6em] mb-10 block" data-aos="fade-up">Software Engineer // Performance Oriented</span>
+            <h1 class="hero-title mb-12 md:mb-16">
                 <span class="title-fill">Software</span>
                 <span class="title-outline">Engineer</span>
             </h1>
-            <p class="text-zinc-500 text-xl md:text-3xl max-w-3xl mx-auto font-light leading-relaxed mb-16" data-aos="fade-up">
+            <p class="text-zinc-500 text-lg md:text-3xl max-w-3xl mx-auto font-light leading-relaxed mb-12 md:mb-16" data-aos="fade-up">
                 Building resilient <span class="text-white">Backend Systems</span> and <span class="text-white">Full-Stack Architectures</span>.
             </p>
-            <div class="flex justify-center gap-10 text-2xl text-zinc-600" data-aos="fade-up">
+            <div class="flex justify-center gap-8 md:gap-10 text-xl md:text-2xl text-zinc-600" data-aos="fade-up">
                 <a href="https://github.com/rodeatharva04" target="_blank" class="hover:text-white transition"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank" class="hover:text-white transition"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:rodeatharva2@gmail.com" class="hover:text-white transition"><i class="fas fa-envelope"></i></a>
@@ -128,250 +128,218 @@
     </section>
 
     <!-- EXPERTISE SECTION -->
-    <section id="expertise" class="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
-        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-20" data-aos="fade-right">Technical Expertise</h2>
+    <section id="expertise" class="py-16 md:py-32 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-16 md:mb-20" data-aos="fade-right">Technical Expertise</h2>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
             <!-- Languages Stack -->
             <div class="comp-card jump-card" data-aos="fade-up">
                 <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest mb-6 block">01 // Languages</span>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="stack-box border-blue-500/30"><i class="fab fa-python text-blue-400 text-2xl"></i> <div><p class="font-black text-xs uppercase">Python</p><p class="text-[9px] text-zinc-500">PRIMARY</p></div></div>
-                    <div class="stack-box"><i class="fab fa-java text-orange-400 text-2xl"></i> <div><p class="font-black text-xs uppercase">Java</p><p class="text-[9px] text-zinc-500">BACKEND</p></div></div>
-                    <div class="stack-box"><i class="fas fa-terminal text-blue-500 text-2xl"></i> <div><p class="font-black text-xs uppercase">C++ / CPP</p></div></div>
-                    <div class="stack-box"><i class="fas fa-code text-zinc-400 text-2xl"></i> <div><p class="font-black text-xs uppercase">C Language</p></div></div>
-                    <div class="stack-box col-span-1 md:col-span-2"><i class="fab fa-js text-yellow-400 text-2xl"></i> <div><p class="font-black text-xs uppercase">JavaScript (ES6+)</p><p class="text-[9px] text-zinc-500">WEB CORE</p></div></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                    <div class="stack-box border-blue-500/30"><i class="fab fa-python text-blue-400 text-xl md:text-2xl"></i> <div><p class="font-black text-xs uppercase">Python</p><p class="text-[9px] text-zinc-500 uppercase">Primary</p></div></div>
+                    <div class="stack-box"><i class="fab fa-java text-orange-400 text-xl md:text-2xl"></i> <div><p class="font-black text-xs uppercase">Java</p><p class="text-[9px] text-zinc-500 uppercase">Backend</p></div></div>
+                    <div class="stack-box"><i class="fas fa-terminal text-blue-500 text-xl md:text-2xl"></i> <div><p class="font-black text-xs uppercase">C++ / CPP</p></div></div>
+                    <div class="stack-box"><i class="fas fa-code text-zinc-400 text-xl md:text-2xl"></i> <div><p class="font-black text-xs uppercase">C Language</p></div></div>
+                    <div class="stack-box col-span-1 md:col-span-2"><i class="fab fa-js text-yellow-400 text-xl md:text-2xl"></i> <div><p class="font-black text-xs uppercase">JavaScript (ES6+)</p><p class="text-[9px] text-zinc-500 uppercase">Web Core</p></div></div>
                 </div>
             </div>
 
-            <!-- Dev Stack -->
+            <!-- Development Stack -->
             <div class="comp-card jump-card" data-aos="fade-up" data-aos-delay="100">
                 <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest mb-6 block">02 // Development</span>
-                <div class="grid grid-cols-2 gap-4 h-full">
-                    <div class="stack-box flex-col justify-center py-6"><i class="fab fa-python text-blue-500 text-4xl mb-3"></i><span class="font-black text-[10px] uppercase">Django</span></div>
-                    <div class="stack-box flex-col justify-center py-6"><i class="fab fa-html5 text-orange-500 text-4xl mb-3"></i><span class="font-black text-[10px] uppercase">HTML5</span></div>
-                    <div class="stack-box flex-col justify-center py-6"><i class="fab fa-css3-alt text-blue-400 text-4xl mb-3"></i><span class="font-black text-[10px] uppercase">Tailwind</span></div>
-                    <div class="stack-box flex-col justify-center py-6"><i class="fas fa-server text-green-500 text-4xl mb-3"></i><span class="font-black text-[10px] uppercase">REST APIs</span></div>
+                <div class="grid grid-cols-2 gap-3 md:gap-4 h-full">
+                    <div class="stack-box flex-col justify-center py-6 md:py-8"><i class="fab fa-python text-blue-500 text-4xl mb-2"></i><span class="font-black text-[10px] uppercase">Django</span></div>
+                    <div class="stack-box flex-col justify-center py-6 md:py-8"><i class="fab fa-html5 text-orange-500 text-4xl mb-2"></i><span class="font-black text-[10px] uppercase">HTML5</span></div>
+                    <div class="stack-box flex-col justify-center py-6 md:py-8"><i class="fab fa-css3-alt text-blue-400 text-4xl mb-2"></i><span class="font-black text-[10px] uppercase">Tailwind</span></div>
+                    <div class="stack-box flex-col justify-center py-6 md:py-8"><i class="fas fa-server text-green-500 text-4xl mb-2"></i><span class="font-black text-[10px] uppercase">REST APIs</span></div>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             <!-- DSA Stack -->
             <div class="comp-card jump-card" data-aos="fade-up">
                 <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest mb-6 block">03 // Logic & DSA</span>
-                <h3 class="text-3xl font-black uppercase mb-8">Arrays to Tries</h3>
-                <div class="flex flex-wrap gap-3">
+                <h3 class="text-3xl font-black uppercase mb-6 md:mb-10">Arrays to Tries</h3>
+                <div class="flex flex-wrap gap-2 md:gap-3">
                     <span class="tag-pill">Arrays</span><span class="tag-pill">Strings</span><span class="tag-pill">Linked Lists</span>
                     <span class="tag-pill recursion-node">Recursion MASTERED</span>
-                    <span class="tag-pill">Backtracking</span><span class="tag-pill">Stacks & Queues</span><span class="tag-pill">Binary Trees</span><span class="tag-pill">Graphs</span><span class="tag-pill">DP</span><span class="tag-pill font-black">Trie Arch</span>
+                    <span class="tag-pill">Backtracking</span><span class="tag-pill">Stacks</span><span class="tag-pill">Trees</span><span class="tag-pill">Graphs</span><span class="tag-pill">DP</span><span class="tag-pill font-black">Trie Arch</span>
                 </div>
             </div>
             <!-- Core Stack -->
             <div class="comp-card jump-card" data-aos="fade-up" data-aos-delay="100">
                 <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest mb-6 block">04 // Computer Engineering</span>
-                <div class="grid grid-cols-2 gap-y-8">
-                    <div class="flex items-center gap-3"><i class="fas fa-database text-blue-500"></i> <span class="font-black text-[11px] uppercase tracking-widest">DBMS & SQL</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-microchip text-blue-500"></i> <span class="font-black text-[11px] uppercase tracking-widest">Operating Systems</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-cube text-blue-500"></i> <span class="font-black text-[11px] uppercase tracking-widest">OOP Design</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-project-diagram text-blue-500"></i> <span class="font-black text-[11px] uppercase tracking-widest">System Design</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-network-wired text-blue-500"></i> <span class="font-black text-[11px] uppercase tracking-widest">Networking</span></div>
-                    <div class="flex items-center gap-3"><i class="fas fa-memory text-blue-500"></i> <span class="font-black text-[11px] uppercase tracking-widest">Low Level Knw.</span></div>
+                <div class="grid grid-cols-2 gap-y-6 md:gap-y-10">
+                    <div class="flex items-center gap-3"><i class="fas fa-database text-blue-500"></i> <span class="font-black text-[10px] md:text-[11px] uppercase tracking-widest">DBMS & SQL</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-microchip text-blue-500"></i> <span class="font-black text-[10px] md:text-[11px] uppercase tracking-widest">Operating Systems</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-cube text-blue-500"></i> <span class="font-black text-[10px] md:text-[11px] uppercase tracking-widest">OOP Design</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-project-diagram text-blue-500"></i> <span class="font-black text-[10px] md:text-[11px] uppercase tracking-widest">System Design</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-network-wired text-blue-500"></i> <span class="font-black text-[10px] md:text-[11px] uppercase tracking-widest">Networking</span></div>
+                    <div class="flex items-center gap-3"><i class="fas fa-memory text-blue-500"></i> <span class="font-black text-[10px] md:text-[11px] uppercase tracking-widest">Low Level Knw.</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LEETCODE SECTION (Corrected Alignment & Logic) -->
-    <section id="stats" class="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
-        <div class="comp-card static-card p-12 lg:p-20 !bg-[#0d0d0d]" data-aos="fade-up">
-            <div class="grid grid-cols-1 lg:grid-cols-[200px_1fr_1fr_1.5fr] gap-12 items-center">
-                <!-- 1. Circular Solved -->
+    <!-- LEETCODE SECTION (RE-ENGINEERED GRID) -->
+    <section id="stats" class="py-16 md:py-32 px-6 md:px-8 max-w-[1440px] mx-auto">
+        <div class="comp-card static-card p-10 md:p-16 !bg-[#0d0d0d]" data-aos="fade-up">
+            <div class="grid grid-cols-1 lg:grid-cols-[160px_1fr_1fr_1.5fr] gap-12 items-center">
+                
                 <div class="flex justify-center">
                     <div class="lc-circle" id="lc-dynamic-circle">
                         <div class="lc-circle-inner">
-                            <div class="text-4xl font-black" id="lc-total">0</div>
-                            <div class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Solved</div>
+                            <div class="text-3xl md:text-4xl font-black" id="lc-total">0</div>
+                            <div class="text-[8px] md:text-[10px] font-black text-zinc-500 uppercase tracking-widest">Solved</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Section Branding -->
-                <div class="space-y-6 text-center lg:text-left">
+                <div class="space-y-4 text-center lg:text-left">
                     <div class="flex items-center justify-center lg:justify-start gap-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" class="w-10 h-10 invert opacity-90" alt="LeetCode Logo">
-                        <h3 class="text-5xl font-black uppercase tracking-tighter leading-none">Algo<br>Stats</h3>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" class="w-8 h-8 md:w-10 md:h-10 invert opacity-90">
+                        <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">Algo<br>Stats</h3>
                     </div>
                     <a href="https://leetcode.com/u/rodeatharva/" target="_blank" class="btn-lc-profile inline-block">LeetCode Profile</a>
                 </div>
 
-                <!-- 3. Global Stats -->
-                <div class="lg:border-x border-white/5 lg:px-12 space-y-10 text-center lg:text-left">
+                <div class="lg:border-x border-white/5 lg:px-12 space-y-8 md:space-y-10 text-center lg:text-left">
                     <div>
-                        <div class="text-4xl font-black" id="lc-rank">0</div>
-                        <p class="text-[10px] font-black text-zinc-600 uppercase tracking-widest mt-2">Global Ranking</p>
+                        <div class="text-3xl md:text-4xl font-black" id="lc-rank">0</div>
+                        <p class="text-[9px] font-black text-zinc-600 uppercase tracking-widest mt-1">Global Ranking</p>
                     </div>
-                    <div class="pt-6 border-t border-white/5">
-                        <div class="text-3xl font-black text-green-500" id="lc-tier">Top 0%</div>
-                        <p class="text-[10px] font-black text-zinc-600 uppercase tracking-widest mt-2">Performance Tier</p>
+                    <div class="pt-4 border-t border-white/5 md:border-t-0 md:pt-0">
+                        <div class="text-2xl md:text-3xl font-black text-green-500" id="lc-tier">Top 0%</div>
+                        <p class="text-[9px] font-black text-zinc-600 uppercase tracking-widest mt-1">Performance Tier</p>
                     </div>
                 </div>
 
-                <!-- 4. Percentage Bars -->
-                <div class="space-y-10">
-                    <div class="space-y-3">
-                        <div class="flex justify-between text-[11px] font-black uppercase"><span class="text-[#00b8a3]">Easy</span><span id="lc-easy-val" class="text-white font-black">0</span></div>
-                        <div class="lc-bar-container"><div id="lc-easy-bar" class="lc-bar-fill bg-[#00b8a3]" style="width: 0%"></div></div>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="flex justify-between text-[11px] font-black uppercase"><span class="text-[#ffc01e]">Medium</span><span id="lc-medium-val" class="text-white font-black">0</span></div>
-                        <div class="lc-bar-container"><div id="lc-medium-bar" class="lc-bar-fill bg-[#ffc01e]" style="width: 0%"></div></div>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="flex justify-between text-[11px] font-black uppercase"><span class="text-[#ef4743]">Hard</span><span id="lc-hard-val" class="text-white font-black">0</span></div>
-                        <div class="lc-bar-container"><div id="lc-hard-bar" class="lc-bar-fill bg-[#ef4743]" style="width: 0%"></div></div>
-                    </div>
+                <div class="space-y-6 md:space-y-10 w-full">
+                    <div class="space-y-2"><div class="flex justify-between text-[10px] font-black uppercase"><span class="text-[#00b8a3]">Easy</span><span id="lc-easy-val" class="text-white">0</span></div><div class="lc-bar-container"><div id="lc-easy-bar" class="lc-bar-fill bg-[#00b8a3]" style="width: 0%"></div></div></div>
+                    <div class="space-y-2"><div class="flex justify-between text-[10px] font-black uppercase"><span class="text-[#ffc01e]">Medium</span><span id="lc-medium-val" class="text-white">0</span></div><div class="lc-bar-container"><div id="lc-medium-bar" class="lc-bar-fill bg-[#ffc01e]" style="width: 0%"></div></div></div>
+                    <div class="space-y-2"><div class="flex justify-between text-[10px] font-black uppercase"><span class="text-[#ef4743]">Hard</span><span id="lc-hard-val" class="text-white">0</span></div><div class="lc-bar-container"><div id="lc-hard-bar" class="lc-bar-fill bg-[#ef4743]" style="width: 0%"></div></div></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- PROJECTS SECTION -->
-    <section id="projects" class="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
-        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-24 text-center">Engineering Portfolio</h2>
+    <section id="projects" class="py-16 md:py-32 px-6 md:px-8 max-w-[1440px] mx-auto">
+        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-16 md:mb-24 text-center">Engineering Portfolio</h2>
         
-        <!-- NoteShare -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-40 group" data-aos="fade-up">
+        <!-- NoteShare (Slider + Contain) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 mb-24 md:mb-40 group" data-aos="fade-up">
             <div class="flex flex-col justify-center order-2 lg:order-1">
-                <span class="tag-pill text-blue-500 mb-8 w-fit">Full-Stack Architecture</span>
-                <h3 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-none">NoteShare</h3>
-                <ul class="text-zinc-500 text-lg font-light mb-12 space-y-4">
-                    <li class="flex gap-4"><i class="fas fa-check-circle text-blue-500 mt-1"></i> <span>Developed high-performance hub using <span class="text-white">Django framework</span>.</span></li>
-                    <li class="flex gap-4"><i class="fas fa-check-circle text-blue-500 mt-1"></i> <span>Implemented <span class="text-white">SMTP-based OTP</span> verification for secure logins.</span></li>
-                    <li class="flex gap-4"><i class="fas fa-check-circle text-blue-500 mt-1"></i> <span>Optimized backend queries with <span class="text-white">ORM reduction</span>, cutting load times by 40%.</span></li>
+                <span class="tag-pill text-blue-500 mb-6 w-fit">Full-Stack Architecture</span>
+                <h3 class="text-4xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">NoteShare</h3>
+                <ul class="text-zinc-500 text-base md:text-lg font-light mb-8 md:mb-12 space-y-4">
+                    <li class="flex gap-4"><i class="fas fa-check-circle text-blue-500 mt-1 text-sm"></i> <span>Developed high-performance hub using <span class="text-white">Django</span>.</span></li>
+                    <li class="flex gap-4"><i class="fas fa-check-circle text-blue-500 mt-1 text-sm"></i> <span>Implemented <span class="text-white">SMTP-based OTP</span> verification.</span></li>
+                    <li class="flex gap-4"><i class="fas fa-check-circle text-blue-500 mt-1 text-sm"></i> <span>Optimized with <span class="text-white">ORM reduction</span> logic.</span></li>
                 </ul>
-                <div class="flex gap-6 mt-4">
-                    <a href="https://github.com/rodeatharva04/noteshare" target="_blank" class="btn-elegant !bg-zinc-900 border border-white/5"><i class="fab fa-github"></i> Source</a>
+                <div class="flex gap-4">
+                    <a href="https://github.com/rodeatharva04/noteshare" target="_blank" class="btn-elegant bg-zinc-900 border border-white/5 hover:bg-zinc-800 transition"><i class="fab fa-github"></i> Code</a>
                     <a href="https://noteshare-8nvp.onrender.com" target="_blank" class="btn-elegant live-highlight"><i class="fas fa-globe"></i> Live View</a>
                 </div>
             </div>
-            <div class="comp-card static-card overflow-hidden h-[350px] md:h-[500px] p-0 rounded-3xl order-1 lg:order-2 bg-black">
+            <div class="comp-card static-card overflow-hidden h-[300px] md:h-[500px] p-0 rounded-2xl md:rounded-3xl order-1 lg:order-2 bg-black flex items-center justify-center">
                 <div class="swiper project-swiper h-full w-full">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="w-full h-full object-contain"></div>
-                        <div class="swiper-slide"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="w-full h-full object-contain"></div>
+                        <div class="swiper-slide h-full flex items-center justify-center bg-zinc-950">
+                            <img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="w-full h-full object-contain">
+                        </div>
                     </div>
                     <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Derivatives 5.3 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20" data-aos="fade-up">
-            <div class="comp-card static-card p-0 h-[350px] md:h-[500px] overflow-hidden order-2 lg:order-1 rounded-3xl bg-zinc-950">
-                <div class="swiper project-swiper h-full w-full">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide h-full flex flex-col justify-center px-12 md:px-20">
-                            <div class="font-mono text-xs md:text-sm space-y-4">
-                                <p class="text-zinc-600 opacity-40">// Derivatives_v5.3.py</p>
-                                <p class="text-blue-500">def derive(expression):</p>
-                                <p class="text-white ml-6">tokens = tokenize(expression)</p>
-                                <p class="text-white ml-6">return recursive_decompose(tokens)</p>
-                                <div class="pt-8 border-t border-white/5 mt-8"><p class="text-white font-bold text-2xl">> sec²(x) + 1/x</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Derivatives 5.3 (IMAGE REPLACED) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20" data-aos="fade-up">
+            <div class="comp-card static-card p-0 h-[300px] md:h-[500px] overflow-hidden order-2 lg:order-1 rounded-2xl md:rounded-3xl bg-zinc-950 flex items-center justify-center">
+                <img src="https://lh3.googleusercontent.com/d/1YwP39rczfsV0Goiq0RtIYRqtKjLAyOZV" class="w-full h-full object-contain" alt="Derivatives Screenshot">
             </div>
             <div class="order-1 lg:order-2 flex flex-col justify-center">
-                <h3 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-10 leading-none">Derivatives 5.3</h3>
-                <ul class="text-zinc-500 text-lg font-light mb-12 space-y-4">
-                    <li class="flex gap-4"><i class="fas fa-microchip text-blue-500 mt-1"></i> <span>Zero-dependency <span class="text-white">Symbolic Differentiation</span> engine in Python.</span></li>
-                    <li class="flex gap-4"><i class="fas fa-microchip text-blue-500 mt-1"></i> <span>Recursive decomposition for trigonometric & transcendental functions.</span></li>
-                    <li class="flex gap-4"><i class="fas fa-microchip text-blue-500 mt-1"></i> <span>Engineered specialized tokenization for multi-variable calculus.</span></li>
+                <h3 class="text-4xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">Derivatives 5.3</h3>
+                <ul class="text-zinc-500 text-base md:text-lg font-light mb-8 md:mb-12 space-y-4">
+                    <li class="flex gap-4"><i class="fas fa-microchip text-blue-500 mt-1 text-sm"></i> <span>Zero-dependency <span class="text-white">Symbolic Differentiation</span> engine.</span></li>
+                    <li class="flex gap-4"><i class="fas fa-microchip text-blue-500 mt-1 text-sm"></i> <span>Recursive decomposition for trigonometric & transcendental functions.</span></li>
                 </ul>
-                <div class="flex gap-6 mt-4">
-                    <a href="https://github.com/rodeatharva04/Derivatives-v5" target="_blank" class="btn-elegant !bg-zinc-900 border border-white/5"><i class="fab fa-github"></i> Code</a>
-                    <a href="https://drive.google.com/file/d/1sJsNNP9ugzwchH4LtwWTS1JCxFtqlI2Q/view" target="_blank" class="btn-elegant !bg-blue-600/10 border border-blue-500/30 !text-blue-500"><i class="fas fa-file-pdf"></i> Rulebook</a>
+                <div class="flex gap-4">
+                    <a href="https://github.com/rodeatharva04/Derivatives-v5" target="_blank" class="btn-elegant bg-zinc-900 border border-white/5"><i class="fab fa-github"></i> Code</a>
+                    <a href="https://drive.google.com/file/d/1sJsNNP9ugzwchH4LtwWTS1JCxFtqlI2Q/view" target="_blank" class="btn-elegant border border-blue-500/30 !bg-blue-600/10 !text-blue-500"><i class="fas fa-file-pdf"></i> Rulebook</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- EXPERIENCE SECTION -->
-    <section id="experience" class="py-24 px-6 md:px-12 bg-zinc-950/30">
+    <section id="experience" class="py-16 md:py-32 px-6 md:px-8 bg-zinc-950/30">
         <div class="max-w-[1440px] mx-auto">
-            <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-24">Experience</h2>
-            <div class="comp-card static-card border-l-8 border-blue-600 p-12 lg:p-20">
-                <div class="flex flex-col lg:flex-row justify-between mb-16 gap-8">
+            <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-16 md:mb-24 text-center lg:text-left">Experience</h2>
+            <div class="comp-card static-card border-l-8 border-blue-600 p-8 md:p-20 relative">
+                <div class="flex flex-col lg:flex-row justify-between mb-10 md:mb-16 gap-6">
                     <div>
-                        <h4 class="text-4xl md:text-5xl font-black uppercase mb-2">Web Development Intern</h4>
-                        <p class="text-blue-500 font-black uppercase text-xs tracking-[0.4em] mt-3">EY GDS & AICTE // INDIA</p>
+                        <h4 class="text-3xl md:text-5xl font-black uppercase mb-2">Web Intern</h4>
+                        <p class="text-blue-500 font-black uppercase text-[10px] md:text-xs tracking-[0.4em] mt-3">EY GDS & AICTE // INDIA</p>
                     </div>
-                    <span class="tag-pill h-fit px-8 py-3 bg-white/5">Feb 2025 — Mar 2025</span>
+                    <span class="tag-pill h-fit px-8 py-3 bg-white/5 w-fit">Feb 2025 — Mar 2025</span>
                 </div>
-                <ul class="text-zinc-500 text-lg md:text-xl font-light space-y-8 mb-16">
-                    <li class="flex gap-8"><span class="w-2 h-2 rounded-full bg-blue-500 mt-3 flex-shrink-0"></span> <span>Engineered responsive full-stack modules using <span class="text-white">Django</span> and <span class="text-white">JavaScript</span>.</span></li>
-                    <li class="flex gap-8"><span class="w-2 h-2 rounded-full bg-blue-500 mt-3 flex-shrink-0"></span> <span>Automated <span class="text-white">Security Audits</span> and implemented multi-factor authentication.</span></li>
-                    <li class="flex gap-8"><span class="w-2 h-2 rounded-full bg-blue-500 mt-3 flex-shrink-0"></span> <span>Optimized cloud deployments on <span class="text-white">Render</span> for high availability.</span></li>
+                <ul class="text-zinc-500 text-base md:text-xl font-light space-y-8 mb-16">
+                    <li class="flex gap-6"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-3 flex-shrink-0"></span> <span>Engineered responsive full-stack modules using <span class="text-white">Django</span> & <span class="text-white">JavaScript</span>.</span></li>
+                    <li class="flex gap-6"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-3 flex-shrink-0"></span> <span>Optimized cloud-based deployments on <span class="text-white">Render</span> for high availability.</span></li>
                 </ul>
-                <a href="https://drive.google.com/file/d/1gMiEfuD8uubi0r1dgJDzYTgdRSDdPnQ_/view" target="_blank" class="btn-elegant px-10 py-4 text-xs w-fit"><i class="fas fa-certificate"></i> Verify Internship Certificate</a>
+                <a href="https://drive.google.com/file/d/1gMiEfuD8uubi0r1dgJDzYTgdRSDdPnQ_/view" target="_blank" class="btn-elegant px-8 py-4 text-[10px] md:text-xs"><i class="fas fa-certificate"></i> Verify Internship Certificate</a>
             </div>
         </div>
     </section>
 
-    <!-- CERTIFICATES GALLERY -->
-    <section id="certificates" class="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
-        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-24 text-center">Industry Credentials</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
-            <a href="https://drive.google.com/file/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S/view" target="_blank" class="comp-card static-card p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" class="w-full h-full object-cover rounded-xl" alt="Certificate"></a>
-            <a href="https://drive.google.com/file/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf/view" target="_blank" class="comp-card static-card p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" class="w-full h-full object-cover rounded-xl" alt="Certificate"></a>
-            <a href="https://drive.google.com/file/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV/view" target="_blank" class="comp-card static-card p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" class="w-full h-full object-cover rounded-xl" alt="Certificate"></a>
-            <a href="https://drive.google.com/file/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e/view" target="_blank" class="comp-card static-card p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" class="w-full h-full object-cover rounded-xl" alt="Certificate"></a>
-            <a href="https://drive.google.com/file/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h/view" target="_blank" class="comp-card static-card p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" class="w-full h-full object-cover rounded-xl" alt="Certificate"></a>
-            <a href="https://drive.google.com/file/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI/view" target="_blank" class="comp-card static-card p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" class="w-full h-full object-cover rounded-xl" alt="Certificate"></a>
+    <!-- CERTIFICATES (FULL COLOR & STATIC) -->
+    <section id="certificates" class="py-16 md:py-32 px-6 md:px-8 max-w-[1440px] mx-auto">
+        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-16 md:mb-24 text-center">Industry Credentials</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <a href="https://drive.google.com/file/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S/view" target="_blank" class="comp-card static-card p-2 md:p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" class="w-full h-full object-cover rounded-xl"></a>
+            <a href="https://drive.google.com/file/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf/view" target="_blank" class="comp-card static-card p-2 md:p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" class="w-full h-full object-cover rounded-xl"></a>
+            <a href="https://drive.google.com/file/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV/view" target="_blank" class="comp-card static-card p-2 md:p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" class="w-full h-full object-cover rounded-xl"></a>
+            <a href="https://drive.google.com/file/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e/view" target="_blank" class="comp-card static-card p-2 md:p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" class="w-full h-full object-cover rounded-xl"></a>
+            <a href="https://drive.google.com/file/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h/view" target="_blank" class="comp-card static-card p-2 md:p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" class="w-full h-full object-cover rounded-xl"></a>
+            <a href="https://drive.google.com/file/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI/view" target="_blank" class="comp-card static-card p-2 md:p-4 aspect-[4/3]"><img src="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" class="w-full h-full object-cover rounded-xl"></a>
         </div>
     </section>
 
     <!-- ACADEMIC & LEADERSHIP -->
-    <section id="academic" class="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
-        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-24 text-center lg:text-left">Education & Leadership</h2>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+    <section id="academic" class="py-16 md:py-32 px-6 md:px-8 max-w-[1440px] mx-auto">
+        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-16 md:mb-24 text-center lg:text-left">Education & Leadership</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-20">
             <div class="lg:col-span-8 comp-card static-card border-l-4 border-blue-600">
-                <div class="flex flex-col md:flex-row justify-between items-start h-full gap-8">
+                <div class="flex flex-col md:flex-row justify-between items-start h-full gap-6">
                     <div>
-                        <p class="text-[10px] font-black uppercase text-zinc-600 mb-4 tracking-widest">BE Computer Engineering</p>
-                        <h4 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">Undergraduate</h4>
-                        <p class="text-blue-500 font-bold text-sm mt-6 tracking-widest uppercase">SP Pune University</p>
+                        <p class="text-[9px] md:text-[10px] font-black uppercase text-zinc-600 mb-4 tracking-widest">BE Computer Engineering</p>
+                        <h4 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">Undergraduate</h4>
+                        <p class="text-blue-500 font-bold text-[10px] md:text-xs mt-6 tracking-widest uppercase">SP Pune University</p>
                     </div>
                     <div class="text-left md:text-right">
-                        <p class="text-7xl md:text-8xl font-black text-white leading-none">7.71</p>
+                        <p class="text-6xl md:text-8xl font-black text-white leading-none">7.71</p>
                         <p class="text-zinc-600 text-[10px] font-black uppercase tracking-widest mt-2">Aggregate CGPA</p>
                     </div>
                 </div>
             </div>
-            <div class="lg:col-span-4 flex flex-col gap-8">
-                <div class="comp-card static-card !p-8"><p class="text-zinc-600 text-[10px] font-black mb-4 uppercase">HSC | 2022</p><h5 class="text-2xl font-black uppercase leading-none">Distinction</h5></div>
-                <div class="comp-card static-card !p-8"><p class="text-zinc-600 text-[10px] font-black mb-4 uppercase">SSC | 2020</p><h5 class="text-2xl font-black uppercase leading-none">First Class</h5></div>
+            <div class="lg:col-span-4 flex flex-col gap-6 md:gap-8">
+                <div class="comp-card static-card !p-8 flex justify-center flex-col"><p class="text-zinc-600 text-[10px] font-black mb-2 uppercase">HSC | 2022</p><h5 class="text-xl md:text-2xl font-black uppercase leading-none">Distinction</h5></div>
+                <div class="comp-card static-card !p-8 flex justify-center flex-col"><p class="text-zinc-600 text-[10px] font-black mb-2 uppercase">SSC | 2020</p><h5 class="text-xl md:text-2xl font-black uppercase leading-none">First Class</h5></div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="comp-card static-card p-10 flex gap-6 items-center">
-                <i class="fas fa-trophy text-blue-500 text-3xl"></i>
-                <div><h4 class="text-2xl font-black uppercase">Hackathon Finalist</h4><p class="text-zinc-500 text-sm mt-1">Top 20 Finalist @ Tech Pragyan 2.0. Developed agro-priority logistics API.</p></div>
-            </div>
-            <div class="comp-card static-card p-10 flex gap-6 items-center">
-                <i class="fas fa-users-cog text-blue-500 text-3xl"></i>
-                <div><h4 class="text-2xl font-black uppercase">Technical Lead</h4><p class="text-zinc-500 text-sm mt-1">Managed milestone delivery and technical coordination for 4 years.</p></div>
-            </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            <div class="comp-card static-card p-10 flex gap-6 items-center"><i class="fas fa-trophy text-blue-500 text-3xl md:text-4xl"></i><div><h4 class="text-xl md:text-2xl font-black uppercase">Hackathon Finalist</h4><p class="text-zinc-500 text-sm md:text-base">Top 20 Finalist @ Tech Pragyan 2.0.</p></div></div>
+            <div class="comp-card static-card p-10 flex gap-6 items-center"><i class="fas fa-users-cog text-blue-500 text-3xl md:text-4xl"></i><div><h4 class="text-xl md:text-2xl font-black uppercase">Technical Lead</h4><p class="text-zinc-500 text-sm md:text-base">Milestone coordination for 4 consecutive academic years.</p></div></div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="py-32 border-t border-white/5 text-center mt-20">
-        <div class="text-2xl font-black uppercase mb-12">Atharva <span class="text-blue-600">Rode.</span></div>
-        <p class="text-zinc-800 text-[11px] font-bold uppercase tracking-[1em]">Engineered For Performance © 2026</p>
+    <footer class="py-16 md:py-32 border-t border-white/5 text-center mt-20">
+        <div class="text-xl md:text-3xl font-black uppercase mb-12">Atharva <span class="text-blue-600">Rode.</span></div>
+        <p class="text-zinc-800 text-[9px] md:text-[11px] font-bold uppercase tracking-[1em]">Engineered For Performance © 2026</p>
     </footer>
 
     <!-- SCRIPTS -->
@@ -379,15 +347,8 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
+        new Swiper('.project-swiper', { loop: true, autoplay: { delay: 4000 }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' } });
         
-        // Swiper Initializer
-        new Swiper('.project-swiper', { 
-            loop: true, 
-            autoplay: { delay: 3500, disableOnInteraction: false },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' } 
-        });
-        
-        // LeetCode Logic
         async function fetchLC() {
             try {
                 const res = await fetch('https://leetcode-stats-api.herokuapp.com/rodeatharva');
@@ -415,7 +376,6 @@
         }
         fetchLC();
         
-        // Card Spotlight Effect
         document.addEventListener("mousemove", (e) => {
             document.querySelectorAll(".comp-card").forEach((card) => {
                 const rect = card.getBoundingClientRect();
