@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Atharva Rode | Software Engineer</title>
 
     <!-- Dependencies -->
@@ -27,12 +27,17 @@
             --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.01);
         }
 
+        /* Global Reset for Mobile */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+
         body { 
             background-color: var(--bg);
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
         /* Background Grid */
@@ -47,12 +52,13 @@
         .bento-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px; /* Slightly smaller radius for mobile */
-            padding: 20px; /* Mobile Padding */
+            border-radius: 16px;
+            padding: 20px; /* Base mobile padding */
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         @media (min-width: 768px) { 
             .bento-card { 
@@ -69,15 +75,16 @@
         /* Typography */
         .font-grotesk { font-family: 'Space Grotesk', sans-serif; }
         
+        /* Fixed Title sizing for mobile without breaking */
         .hero-title {
-            font-size: clamp(3rem, 12vw, 8rem); /* Adjusted clamp for better mobile fit */
+            font-size: clamp(2.75rem, 11vw, 7rem);
             line-height: 0.95;
             font-weight: 800;
             letter-spacing: -0.04em;
             color: var(--text-main);
+            word-wrap: break-word;
         }
         
-        /* Mobile Break for title */
         .hero-break {
             display: block;
         }
@@ -85,22 +92,25 @@
         /* Buttons & Pills */
         .btn-primary {
             background: var(--text-main); color: #fff;
-            padding: 12px 24px; border-radius: 100px;
-            font-weight: 600; font-size: 14px;
+            padding: 10px 18px; 
+            border-radius: 100px;
+            font-weight: 600; font-size: 13px;
             transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             white-space: nowrap;
+        }
+        @media (min-width: 768px) {
+            .btn-primary { padding: 12px 24px; font-size: 14px; }
         }
         .btn-primary:hover { background: var(--accent); }
 
         .btn-live {
             background: var(--accent); color: white;
-            padding: 10px 20px; /* Larger touch target */
+            padding: 10px 20px;
             border-radius: 100px;
             font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
             box-shadow: 0 4px 15px var(--accent-glow);
             transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
         }
-        @media (min-width: 768px) { .btn-live { padding: 8px 20px; } }
 
         .btn-outline {
             background: transparent; color: var(--text-main);
@@ -112,10 +122,13 @@
 
         .pill {
             background: #F4F4F5; color: var(--text-main);
-            padding: 8px 12px; border-radius: 8px;
+            padding: 6px 10px; border-radius: 6px;
             font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
             border: 1px solid transparent; white-space: nowrap;
+            display: inline-block; margin-bottom: 2px;
         }
+        @media (min-width: 768px) { .pill { padding: 8px 12px; border-radius: 8px; } }
+
         .pill-accent { color: var(--accent); background: #fff7ed; border-color: #ffedd5; }
         
         .pill-recursion {
@@ -127,7 +140,7 @@
 
         /* LeetCode Radial */
         .lc-radial {
-            width: 120px; height: 120px; border-radius: 50%;
+            width: 100px; height: 100px; border-radius: 50%; /* Smaller on mobile */
             background: conic-gradient(
                 #10b981 var(--easy-deg, 0deg),
                 #f59e0b var(--easy-deg, 0deg) var(--med-deg, 0deg),
@@ -137,6 +150,8 @@
             position: relative; display: flex; align-items: center; justify-content: center;
             margin: 0 auto;
         }
+        @media (min-width: 768px) { .lc-radial { width: 120px; height: 120px; } }
+
         .lc-radial::after {
             content: ""; position: absolute; inset: 8px; background: var(--card-bg); border-radius: 50%;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
@@ -159,10 +174,11 @@
     <div class="bg-grid"></div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed top-0 w-full z-[100] glass-nav transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-zinc-100">
+    <nav class="fixed top-0 w-full z-[100] transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-zinc-100">
         <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex justify-between items-center relative">
-            <a href="#home" class="font-grotesk font-bold text-lg md:text-xl tracking-tight text-zinc-900 z-50">
-                rodeatharva2<span class="text-orange-500">@...</span>
+            <!-- Logo: Truncated on mobile to prevent overflow -->
+            <a href="#home" class="font-grotesk font-bold text-base md:text-xl tracking-tight text-zinc-900 z-50 flex items-center gap-1">
+                rodeatharva2<span class="text-orange-500 hidden sm:inline">@...</span>
             </a>
             
             <!-- Desktop Links -->
@@ -175,40 +191,43 @@
             </div>
 
             <!-- Resume & Mobile Toggle -->
-            <div class="flex items-center gap-3 z-50">
-                <a href="https://drive.google.com/file/d/1ncuCUwVLReOpw7Yj54YlIC6AQzmeZu9V/view?usp=sharing" target="_blank" class="btn-primary py-2 px-4 text-xs md:text-sm">
+            <div class="flex items-center gap-2 md:gap-3 z-50">
+                <a href="https://drive.google.com/file/d/1ncuCUwVLReOpw7Yj54YlIC6AQzmeZu9V/view?usp=sharing" target="_blank" class="btn-primary">
                     Resume <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
                 </a>
                 
                 <!-- Hamburger Button -->
-                <button id="menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-zinc-700 hover:text-orange-500 transition-colors focus:outline-none">
-                    <i class="fas fa-bars text-xl"></i>
+                <button id="menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-zinc-700 hover:text-orange-500 transition-colors focus:outline-none bg-zinc-50 rounded-full ml-1">
+                    <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-white border-b border-zinc-200 overflow-hidden max-h-0 opacity-0 shadow-xl">
-            <div class="flex flex-col p-4 space-y-4 font-medium text-zinc-600 text-center">
-                <a href="#stats" class="mobile-link py-2 hover:text-orange-500 border-b border-zinc-50">Stats</a>
-                <a href="#expertise" class="mobile-link py-2 hover:text-orange-500 border-b border-zinc-50">Tech Stack</a>
-                <a href="#projects" class="mobile-link py-2 hover:text-orange-500 border-b border-zinc-50">Projects</a>
-                <a href="#experience" class="mobile-link py-2 hover:text-orange-500 border-b border-zinc-50">Experience</a>
-                <a href="#certificates" class="mobile-link py-2 hover:text-orange-500">Credentials</a>
+            <div class="flex flex-col p-4 space-y-2 font-medium text-zinc-600 text-center">
+                <a href="#stats" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Stats</a>
+                <a href="#expertise" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Tech Stack</a>
+                <a href="#projects" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Projects</a>
+                <a href="#experience" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Experience</a>
+                <a href="#certificates" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Credentials</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="min-h-screen flex flex-col justify-center px-4 md:px-6 pt-20">
+    <!-- Using min-h-svh (small viewport height) for better mobile browser support -->
+    <section class="min-h-[90svh] md:min-h-screen flex flex-col justify-center px-4 md:px-6 pt-24 md:pt-20">
         <div class="max-w-7xl mx-auto w-full">
             <!-- Open to Work Badge -->
-            <div class="inline-flex items-center gap-3 mb-6 px-4 py-2 bg-white border border-zinc-200 rounded-full shadow-sm" data-aos="fade-down">
-                <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </span>
-                <span class="text-xs font-bold uppercase tracking-wider text-zinc-700">Open to Work</span>
+            <div class="flex mb-6 md:mb-8" data-aos="fade-down">
+                <div class="inline-flex items-center gap-3 px-4 py-2 bg-white border border-zinc-200 rounded-full shadow-sm">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-zinc-700">Open to Work</span>
+                </div>
             </div>
             
             <h1 class="hero-title mb-6 md:mb-8 font-grotesk" data-aos="fade-up">
@@ -216,15 +235,15 @@
                 <span class="hero-break text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">ENGINEER.</span>
             </h1>
 
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-12 border-t border-zinc-200 pt-8">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-12 border-t border-zinc-200 pt-8 mt-4">
                 <p class="text-zinc-500 text-base md:text-xl max-w-xl font-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
                     Architecting high-performance backend systems with emphasis on scalability, resilience, and <span class="text-zinc-900 font-bold">Algorithmic Efficiency</span>.
                 </p>
 
-                <div class="flex gap-8 md:gap-6 w-full md:w-auto justify-start" data-aos="fade-left" data-aos-delay="200">
-                    <a href="https://github.com/rodeatharva04" class="text-zinc-400 hover:text-black transition-all text-3xl md:text-2xl"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/atharva-rode-95a6b5271" class="text-zinc-400 hover:text-[#0077b5] transition-all text-3xl md:text-2xl"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:rodeatharva2@gmail.com" class="text-zinc-400 hover:text-orange-500 transition-all text-3xl md:text-2xl"><i class="fas fa-envelope"></i></a>
+                <div class="flex gap-6 md:gap-6 w-full md:w-auto justify-start" data-aos="fade-left" data-aos-delay="200">
+                    <a href="https://github.com/rodeatharva04" target="_blank" class="text-zinc-400 hover:text-black transition-all text-2xl md:text-2xl"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank" class="text-zinc-400 hover:text-[#0077b5] transition-all text-2xl md:text-2xl"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:rodeatharva2@gmail.com" class="text-zinc-400 hover:text-orange-500 transition-all text-2xl md:text-2xl"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
         </div>
@@ -234,11 +253,11 @@
     <section id="stats" class="py-12 px-4 md:px-6">
         <div class="max-w-6xl mx-auto">
             <div class="bento-card" data-aos="fade-up">
-                <div class="flex flex-col lg:flex-row items-center gap-10">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
                     <!-- Radial Chart -->
                     <div class="lc-radial shrink-0" id="lc-circle">
                         <div class="lc-content">
-                            <div class="text-3xl md:text-4xl font-grotesk font-bold text-zinc-900" id="lc-total">--</div>
+                            <div class="text-2xl md:text-4xl font-grotesk font-bold text-zinc-900" id="lc-total">--</div>
                             <div class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Solved</div>
                         </div>
                     </div>
@@ -247,7 +266,7 @@
                     <div class="flex-1 w-full">
                         <div class="flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
                             <div class="flex items-center gap-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" class="w-6 h-6 md:w-8 md:h-8 opacity-90">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" class="w-6 h-6 md:w-8 md:h-8 opacity-90" alt="LeetCode Logo">
                                 <div>
                                     <h3 class="text-base md:text-lg font-bold font-grotesk">LeetCode Performance</h3>
                                     <p class="text-[10px] md:text-xs text-zinc-400">Live Statistics</p>
@@ -256,7 +275,7 @@
                             <a href="https://leetcode.com/u/rodeatharva/" target="_blank" class="text-[10px] md:text-xs font-bold uppercase text-orange-500 hover:underline">View Profile <i class="fas fa-external-link-alt ml-1"></i></a>
                         </div>
                         
-                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-6">
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
                             <div class="space-y-2">
                                 <div class="flex justify-between text-xs font-bold uppercase"><span class="text-emerald-600">Easy</span><span id="lc-easy-val" class="text-zinc-900">0</span></div>
                                 <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div id="lc-easy-bar" class="h-full bg-emerald-500 w-0 transition-all duration-1000"></div></div>
@@ -309,32 +328,32 @@
                 <div class="bento-card bg-zinc-50 lg:row-span-2 border-none">
                     <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">01 // Languages</span>
                     <div class="grid grid-cols-2 gap-3">
-                        <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div class="bg-white p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fab fa-python text-2xl text-zinc-800"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Python</span>
                         </div>
-                        <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div class="bg-white p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fab fa-java text-2xl text-zinc-800"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Java</span>
                         </div>
                         
                         <!-- Highlighted JavaScript -->
-                        <div class="bg-orange-50 border border-orange-200 p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div class="bg-orange-50 border border-orange-200 p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fab fa-js text-2xl text-orange-500"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-orange-600">JS</span>
                         </div>
 
                         <!-- Highlighted SQL -->
-                        <div class="bg-orange-50 border border-orange-200 p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div class="bg-orange-50 border border-orange-200 p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fas fa-database text-2xl text-orange-500"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-orange-600">SQL</span>
                         </div>
 
-                        <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div class="bg-white p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <span class="text-xl font-black text-zinc-800">C++</span>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-500">System</span>
                         </div>
-                        <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div class="bg-white p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <span class="text-xl font-black text-zinc-800">C</span>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Embed</span>
                         </div>
@@ -379,7 +398,7 @@
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-zinc-900">DBMS</span>
-                            <span class="text-[9px] text-zinc-400">Queery & Optimization</span>
+                            <span class="text-[9px] text-zinc-400">Query & Optimization</span>
                         </div>
                         <div class="w-full h-[1px] bg-zinc-100"></div>
                         <div class="flex items-center justify-between">
@@ -406,15 +425,16 @@
                 <!-- NoteShare -->
                 <div class="bento-card !p-0 overflow-hidden" data-aos="fade-up">
                     <div class="grid grid-cols-1 md:grid-cols-2 h-full">
-                        <div class="order-1 md:order-2 h-64 md:h-auto bg-zinc-100 relative p-6">
-                            <div class="swiper project-swiper h-full w-full rounded-lg shadow-xl overflow-hidden bg-white">
+                        <!-- Swiper adjusted for Aspect Ratio -->
+                        <div class="order-1 md:order-2 bg-zinc-100 relative p-6">
+                            <div class="swiper project-swiper aspect-video w-full rounded-lg shadow-xl overflow-hidden bg-white">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="h-full object-contain"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="h-full object-contain"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU" class="h-full object-contain"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="h-full object-contain"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="h-full object-contain"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU" class="h-full object-contain"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="h-full w-full object-contain" alt="Project Image 1"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="h-full w-full object-contain" alt="Project Image 2"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU" class="h-full w-full object-contain" alt="Project Image 3"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="h-full w-full object-contain" alt="Project Image 1"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="h-full w-full object-contain" alt="Project Image 2"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU" class="h-full w-full object-contain" alt="Project Image 3"></div>
                                 </div>
                                 <div class="swiper-pagination"></div>
                             </div>
@@ -447,8 +467,8 @@
                 <!-- Derivatives -->
                 <div class="bento-card" data-aos="fade-up">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
-                        <div class="w-full md:w-1/3 shrink-0 bg-zinc-50 rounded-2xl p-6 flex items-center justify-center border border-zinc-100">
-                            <img src="https://lh3.googleusercontent.com/d/1YwP39rczfsV0Goiq0RtIYRqtKjLAyOZV" class="w-full h-auto object-contain drop-shadow-lg opacity-90">
+                        <div class="w-full md:w-1/3 shrink-0 bg-zinc-50 rounded-2xl p-6 flex items-center justify-center border border-zinc-100 aspect-video md:aspect-auto">
+                            <img src="https://lh3.googleusercontent.com/d/1YwP39rczfsV0Goiq0RtIYRqtKjLAyOZV" class="w-full h-full object-contain drop-shadow-lg opacity-90" alt="Derivatives Project">
                         </div>
                         <div class="flex-1 w-full">
                             <div class="flex items-center gap-3 mb-4">
@@ -486,7 +506,7 @@
                             <h3 class="text-xl md:text-2xl font-bold font-grotesk text-zinc-900">Web Development Intern</h3>
                             <div class="text-zinc-500 text-xs font-bold uppercase tracking-wider mt-1">EY GDS & AICTE <span class="mx-2 text-zinc-300">•</span> Remote</div>
                         </div>
-                        <span class="px-4 py-1.5 bg-zinc-100 rounded-full text-xs font-bold text-zinc-600 whitespace-nowrap w-fit">
+                        <span class="px-4 py-1.5 bg-zinc-100 rounded-full text-xs font-bold text-zinc-600 whitespace-nowrap w-fit mt-2 sm:mt-0">
                             Feb 2025 — Mar 2025
                         </span>
                     </div>
@@ -504,7 +524,7 @@
                 </div>
 
                 <!-- Internship Certificate -->
-                <a href="https://drive.google.com/file/d/1gMiEfuD8uubi0r1dgJDzYTgdRSDdPnQ_/view" target="_blank" class="bento-card group flex flex-col items-center justify-center bg-orange-50 border-orange-200 hover:bg-orange-100 transition-colors cursor-pointer text-center gap-4" data-aos="fade-left">
+                <a href="https://drive.google.com/file/d/1gMiEfuD8uubi0r1dgJDzYTgdRSDdPnQ_/view" target="_blank" class="bento-card group flex flex-col items-center justify-center bg-orange-50 border-orange-200 hover:bg-orange-100 transition-colors cursor-pointer text-center gap-4 py-10" data-aos="fade-left">
                      <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center text-orange-500 shadow-sm group-hover:scale-110 transition-transform">
                         <i class="fas fa-award text-2xl"></i>
                      </div>
@@ -525,33 +545,33 @@
             <!-- Adjusted Grid for Mobile -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <a href="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 1">
                 </a>
                 <a href="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 2">
                 </a>
                 <a href="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 3">
                 </a>
                 <a href="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 4">
                 </a>
                 <a href="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 5">
                 </a>
                 <a href="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 6">
                 </a>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-12 border-t border-zinc-200 bg-white text-center">
+    <footer class="py-12 border-t border-zinc-200 bg-white text-center px-4">
         <h2 class="text-2xl font-black tracking-tight text-zinc-900 mb-8 font-grotesk">ATHARVA RODE.</h2>
         <div class="flex justify-center gap-8 mb-8">
-            <a href="https://github.com/rodeatharva04" class="text-zinc-400 hover:text-black transition-colors"><i class="fab fa-github text-2xl"></i></a>
-            <a href="https://linkedin.com/in/atharva-rode-95a6b5271" class="text-zinc-400 hover:text-[#0077b5] transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
+            <a href="https://github.com/rodeatharva04" target="_blank" class="text-zinc-400 hover:text-black transition-colors"><i class="fab fa-github text-2xl"></i></a>
+            <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank" class="text-zinc-400 hover:text-[#0077b5] transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
             <a href="mailto:rodeatharva2@gmail.com" class="text-zinc-400 hover:text-orange-500 transition-colors"><i class="fas fa-envelope text-2xl"></i></a>
         </div>
         <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">© 2026 Engineered for Performance</p>
