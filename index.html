@@ -60,7 +60,7 @@
             border-radius: 16px;
             padding: 20px;
             /* Base mobile padding */
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: border-color 0.3s ease;
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
@@ -74,9 +74,30 @@
             }
         }
 
-        .bento-card:hover {
-            box-shadow: var(--shadow-hover);
-            border-color: #d4d4d8;
+        /* Gemini-style cursor glow effect */
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    rgba(249, 115, 22, 0.06),
+                    transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bento-card:hover::before {
+            opacity: 1;
+        }
+
+        .bento-card>* {
+            position: relative;
+            z-index: 1;
         }
 
         /* Typography */
@@ -786,6 +807,17 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 40 });
+
+        // Gemini-style cursor glow effect
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', `${x}%`);
+                card.style.setProperty('--mouse-y', `${y}%`);
+            });
+        });
 
         // Mobile Navigation Logic
         const menuBtn = document.getElementById('menu-btn');
