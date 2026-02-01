@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,19 +9,20 @@
     <!-- Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
     <!-- Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap');
-        
+
         :root {
             --bg: #FAFAFA;
             --card-bg: #FFFFFF;
             --text-main: #18181B;
             --text-muted: #71717A;
-            --accent: #F97316; /* Orange */
+            --accent: #F97316;
+            /* Orange */
             --accent-glow: rgba(249, 115, 22, 0.4);
             --border: #E4E4E7;
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.01);
@@ -28,13 +30,14 @@
         }
 
         /* Global Reset for Mobile */
-        html, body {
+        html,
+        body {
             overflow-x: hidden;
             width: 100%;
             -webkit-font-smoothing: antialiased;
         }
 
-        body { 
+        body {
             background-color: var(--bg);
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
@@ -45,7 +48,9 @@
             background-size: 30px 30px;
             background-image: radial-gradient(circle, #e4e4e7 1px, transparent 1px);
             opacity: 0.6;
-            position: fixed; inset: 0; z-index: -1;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
         }
 
         /* Responsive Bento Card */
@@ -53,28 +58,32 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 20px; /* Base mobile padding */
+            padding: 20px;
+            /* Base mobile padding */
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
             width: 100%;
         }
-        @media (min-width: 768px) { 
-            .bento-card { 
-                padding: 32px; 
+
+        @media (min-width: 768px) {
+            .bento-card {
+                padding: 32px;
                 border-radius: 20px;
-            } 
+            }
         }
-        
+
         .bento-card:hover {
             box-shadow: var(--shadow-hover);
             border-color: #d4d4d8;
         }
 
         /* Typography */
-        .font-grotesk { font-family: 'Space Grotesk', sans-serif; }
-        
+        .font-grotesk {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
         /* Fixed Title sizing for mobile without breaking */
         .hero-title {
             font-size: clamp(2.75rem, 11vw, 7rem);
@@ -84,103 +93,198 @@
             color: var(--text-main);
             word-wrap: break-word;
         }
-        
+
         .hero-break {
             display: block;
         }
 
         /* Buttons & Pills */
         .btn-primary {
-            background: var(--text-main); color: #fff;
-            padding: 10px 18px; 
+            background: var(--text-main);
+            color: #fff;
+            padding: 10px 18px;
             border-radius: 100px;
-            font-weight: 600; font-size: 13px;
-            transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             white-space: nowrap;
         }
+
         @media (min-width: 768px) {
-            .btn-primary { padding: 12px 24px; font-size: 14px; }
+            .btn-primary {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
         }
-        .btn-primary:hover { background: var(--accent); }
+
+        .btn-primary:hover {
+            background: var(--accent);
+        }
 
         .btn-live {
-            background: var(--accent); color: white;
+            background: var(--accent);
+            color: white;
             padding: 10px 20px;
             border-radius: 100px;
-            font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             box-shadow: 0 4px 15px var(--accent-glow);
-            transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .btn-outline {
-            background: transparent; color: var(--text-main);
+            background: transparent;
+            color: var(--text-main);
             border: 1px solid var(--border);
-            padding: 10px 20px; border-radius: 100px;
-            font-size: 12px; font-weight: 600;
-            transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .pill {
-            background: #F4F4F5; color: var(--text-main);
-            padding: 6px 10px; border-radius: 6px;
-            font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
-            border: 1px solid transparent; white-space: nowrap;
-            display: inline-block; margin-bottom: 2px;
+            background: #F4F4F5;
+            color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            display: inline-block;
+            margin-bottom: 2px;
         }
-        @media (min-width: 768px) { .pill { padding: 8px 12px; border-radius: 8px; } }
 
-        .pill-accent { color: var(--accent); background: #fff7ed; border-color: #ffedd5; }
-        
+        @media (min-width: 768px) {
+            .pill {
+                padding: 8px 12px;
+                border-radius: 8px;
+            }
+        }
+
+        .pill-accent {
+            color: var(--accent);
+            background: #fff7ed;
+            border-color: #ffedd5;
+        }
+
         .pill-recursion {
-            background: var(--accent); color: white;
+            background: var(--accent);
+            color: white;
             box-shadow: 0 4px 10px var(--accent-glow);
             animation: pulse-glow 2s infinite;
         }
-        @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(249, 115, 22, 0); } 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); } }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(249, 115, 22, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+            }
+        }
 
         /* LeetCode Radial */
         .lc-radial {
-            width: 100px; height: 100px; border-radius: 50%; /* Smaller on mobile */
-            background: conic-gradient(
-                #10b981 var(--easy-deg, 0deg),
-                #f59e0b var(--easy-deg, 0deg) var(--med-deg, 0deg),
-                #ef4444 var(--med-deg, 0deg) var(--hard-deg, 0deg),
-                #e4e4e7 var(--hard-deg, 0deg) 360deg
-            );
-            position: relative; display: flex; align-items: center; justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            /* Smaller on mobile */
+            background: conic-gradient(#10b981 var(--easy-deg, 0deg),
+                    #f59e0b var(--easy-deg, 0deg) var(--med-deg, 0deg),
+                    #ef4444 var(--med-deg, 0deg) var(--hard-deg, 0deg),
+                    #e4e4e7 var(--hard-deg, 0deg) 360deg);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto;
         }
-        @media (min-width: 768px) { .lc-radial { width: 120px; height: 120px; } }
+
+        @media (min-width: 768px) {
+            .lc-radial {
+                width: 120px;
+                height: 120px;
+            }
+        }
 
         .lc-radial::after {
-            content: ""; position: absolute; inset: 8px; background: var(--card-bg); border-radius: 50%;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+            content: "";
+            position: absolute;
+            inset: 8px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-        .lc-content { position: relative; z-index: 2; text-align: center; }
+
+        .lc-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
 
         /* Swiper */
-        .swiper-pagination-bullet { background: #d4d4d8 !important; opacity: 1; }
-        .swiper-pagination-bullet-active { background: var(--text-main) !important; }
-        
-        /* Mobile Nav Transitions */
-        #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; }
-        .nav-open { max-height: 400px !important; opacity: 1 !important; }
+        .swiper-pagination-bullet {
+            background: #d4d4d8 !important;
+            opacity: 1;
+        }
 
-        ::selection { background: var(--accent); color: white; }
+        .swiper-pagination-bullet-active {
+            background: var(--text-main) !important;
+        }
+
+        /* Mobile Nav Transitions */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .nav-open {
+            max-height: 400px !important;
+            opacity: 1 !important;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
     </style>
 </head>
+
 <body id="home">
 
     <div class="bg-grid"></div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed top-0 w-full z-[100] transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-zinc-100">
+    <nav
+        class="fixed top-0 w-full z-[100] transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-zinc-100">
         <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex justify-between items-center relative">
             <!-- Logo: Truncated on mobile to prevent overflow -->
-            <a href="#home" class="font-grotesk font-bold text-base md:text-xl tracking-tight text-zinc-900 z-50 flex items-center gap-1">
-                ATHARVA<span class="text-orange-500 hidden sm:inline">RODE</span
+            <a href="#home"
+                class="font-grotesk font-bold text-base md:text-xl tracking-tight text-zinc-900 z-50 flex items-center gap-1">
+                ATHARVA<span class="text-orange-500 hidden sm:inline">RODE</span>
             </a>
-            
+
             <!-- Desktop Links -->
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-500">
                 <a href="#stats" class="hover:text-orange-500 transition-colors">Stats</a>
@@ -192,25 +296,32 @@
 
             <!-- Resume & Mobile Toggle -->
             <div class="flex items-center gap-2 md:gap-3 z-50">
-                <a href="https://drive.google.com/file/d/1ncuCUwVLReOpw7Yj54YlIC6AQzmeZu9V/view?usp=sharing" target="_blank" class="btn-primary">
+                <a href="https://drive.google.com/file/d/1ncuCUwVLReOpw7Yj54YlIC6AQzmeZu9V/view?usp=sharing"
+                    target="_blank" class="btn-primary">
                     Resume <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
                 </a>
-                
+
                 <!-- Hamburger Button -->
-                <button id="menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-zinc-700 hover:text-orange-500 transition-colors focus:outline-none bg-zinc-50 rounded-full ml-1">
+                <button id="menu-btn"
+                    class="md:hidden w-10 h-10 flex items-center justify-center text-zinc-700 hover:text-orange-500 transition-colors focus:outline-none bg-zinc-50 rounded-full ml-1">
                     <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-white border-b border-zinc-200 overflow-hidden max-h-0 opacity-0 shadow-xl">
+        <div id="mobile-menu"
+            class="md:hidden absolute top-16 left-0 w-full bg-white border-b border-zinc-200 overflow-hidden max-h-0 opacity-0 shadow-xl">
             <div class="flex flex-col p-4 space-y-2 font-medium text-zinc-600 text-center">
                 <a href="#stats" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Stats</a>
-                <a href="#expertise" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Tech Stack</a>
-                <a href="#projects" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Projects</a>
-                <a href="#experience" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Experience</a>
-                <a href="#certificates" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Credentials</a>
+                <a href="#expertise" class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Tech
+                    Stack</a>
+                <a href="#projects"
+                    class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Projects</a>
+                <a href="#experience"
+                    class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Experience</a>
+                <a href="#certificates"
+                    class="mobile-link py-3 hover:text-orange-500 hover:bg-zinc-50 rounded-lg">Credentials</a>
             </div>
         </div>
     </nav>
@@ -221,29 +332,43 @@
         <div class="max-w-7xl mx-auto w-full">
             <!-- Open to Work Badge -->
             <div class="flex mb-6 md:mb-8" data-aos="fade-down">
-                <div class="inline-flex items-center gap-3 px-4 py-2 bg-white border border-zinc-200 rounded-full shadow-sm">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 bg-white border border-zinc-200 rounded-full shadow-sm">
                     <span class="relative flex h-2.5 w-2.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                     </span>
-                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-zinc-700">Open to Work</span>
+                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-zinc-700">Open to
+                        Work</span>
                 </div>
             </div>
-            
+
             <h1 class="hero-title mb-6 md:mb-8 font-grotesk" data-aos="fade-up">
                 SOFTWARE
-                <span class="hero-break text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">ENGINEER.</span>
+                <span
+                    class="hero-break text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">ENGINEER.</span>
             </h1>
 
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-12 border-t border-zinc-200 pt-8 mt-4">
-                <p class="text-zinc-500 text-base md:text-xl max-w-xl font-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    Architecting high-performance backend systems with emphasis on scalability, resilience, and <span class="text-zinc-900 font-bold">Algorithmic Efficiency</span>.
+            <div
+                class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-12 border-t border-zinc-200 pt-8 mt-4">
+                <p class="text-zinc-500 text-base md:text-xl max-w-xl font-light leading-relaxed" data-aos="fade-up"
+                    data-aos-delay="100">
+                    Architecting high-performance backend systems with emphasis on scalability, resilience, and <span
+                        class="text-zinc-900 font-bold">Algorithmic Efficiency</span>.
                 </p>
 
-                <div class="flex gap-6 md:gap-6 w-full md:w-auto justify-start" data-aos="fade-left" data-aos-delay="200">
-                    <a href="https://github.com/rodeatharva04" target="_blank" class="text-zinc-400 hover:text-black transition-all text-2xl md:text-2xl"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank" class="text-zinc-400 hover:text-[#0077b5] transition-all text-2xl md:text-2xl"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:rodeatharva2@gmail.com" class="text-zinc-400 hover:text-orange-500 transition-all text-2xl md:text-2xl"><i class="fas fa-envelope"></i></a>
+                <div class="flex gap-6 md:gap-6 w-full md:w-auto justify-start" data-aos="fade-left"
+                    data-aos-delay="200">
+                    <a href="https://github.com/rodeatharva04" target="_blank"
+                        class="text-zinc-400 hover:text-black transition-all text-2xl md:text-2xl"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank"
+                        class="text-zinc-400 hover:text-[#0077b5] transition-all text-2xl md:text-2xl"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="mailto:rodeatharva2@gmail.com"
+                        class="text-zinc-400 hover:text-orange-500 transition-all text-2xl md:text-2xl"><i
+                            class="fas fa-envelope"></i></a>
                 </div>
             </div>
         </div>
@@ -257,40 +382,64 @@
                     <!-- Radial Chart -->
                     <div class="lc-radial shrink-0" id="lc-circle">
                         <div class="lc-content">
-                            <div class="text-2xl md:text-4xl font-grotesk font-bold text-zinc-900" id="lc-total">--</div>
+                            <div class="text-2xl md:text-4xl font-grotesk font-bold text-zinc-900" id="lc-total">--
+                            </div>
                             <div class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Solved</div>
                         </div>
                     </div>
-                    
+
                     <!-- Content -->
                     <div class="flex-1 w-full">
                         <div class="flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
                             <div class="flex items-center gap-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" class="w-6 h-6 md:w-8 md:h-8 opacity-90" alt="LeetCode Logo">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                                    class="w-6 h-6 md:w-8 md:h-8 opacity-90" alt="LeetCode Logo">
                                 <div>
                                     <h3 class="text-base md:text-lg font-bold font-grotesk">LeetCode Performance</h3>
                                     <p class="text-[10px] md:text-xs text-zinc-400">Live Statistics</p>
                                 </div>
                             </div>
-                            <a href="https://leetcode.com/u/rodeatharva/" target="_blank" class="text-[10px] md:text-xs font-bold uppercase text-orange-500 hover:underline">View Profile <i class="fas fa-external-link-alt ml-1"></i></a>
+                            <a href="https://leetcode.com/u/rodeatharva/" target="_blank"
+                                class="text-[10px] md:text-xs font-bold uppercase text-orange-500 hover:underline">View
+                                Profile <i class="fas fa-external-link-alt ml-1"></i></a>
                         </div>
-                        
+
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
                             <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span class="text-emerald-600">Easy</span><span id="lc-easy-val" class="text-zinc-900">0</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div id="lc-easy-bar" class="h-full bg-emerald-500 w-0 transition-all duration-1000"></div></div>
+                                <div class="flex justify-between text-xs font-bold uppercase"><span
+                                        class="text-emerald-600">Easy</span><span id="lc-easy-val"
+                                        class="text-zinc-900">0</span></div>
+                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+                                    <div id="lc-easy-bar"
+                                        class="h-full bg-emerald-500 w-0 transition-all duration-1000"></div>
+                                </div>
                             </div>
                             <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span class="text-amber-500">Medium</span><span id="lc-medium-val" class="text-zinc-900">0</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div id="lc-medium-bar" class="h-full bg-amber-500 w-0 transition-all duration-1000"></div></div>
+                                <div class="flex justify-between text-xs font-bold uppercase"><span
+                                        class="text-amber-500">Medium</span><span id="lc-medium-val"
+                                        class="text-zinc-900">0</span></div>
+                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+                                    <div id="lc-medium-bar"
+                                        class="h-full bg-amber-500 w-0 transition-all duration-1000"></div>
+                                </div>
                             </div>
                             <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span class="text-red-500">Hard</span><span id="lc-hard-val" class="text-zinc-900">0</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div id="lc-hard-bar" class="h-full bg-red-500 w-0 transition-all duration-1000"></div></div>
+                                <div class="flex justify-between text-xs font-bold uppercase"><span
+                                        class="text-red-500">Hard</span><span id="lc-hard-val"
+                                        class="text-zinc-900">0</span></div>
+                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+                                    <div id="lc-hard-bar" class="h-full bg-red-500 w-0 transition-all duration-1000">
+                                    </div>
+                                </div>
                             </div>
                             <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span class="text-purple-500">Acceptance</span><span id="lc-rate" class="text-zinc-900">0%</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div id="lc-rate-bar" class="h-full bg-purple-500 w-0 transition-all duration-1000"></div></div>
+                                <div class="flex justify-between text-xs font-bold uppercase"><span
+                                        class="text-purple-500">Acceptance</span><span id="lc-rate"
+                                        class="text-zinc-900">0%</span></div>
+                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+                                    <div id="lc-rate-bar" class="h-full bg-purple-500 w-0 transition-all duration-1000">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -301,7 +450,8 @@
                             </div>
                             <div class="text-center md:text-left">
                                 <div class="text-[10px] text-orange-500 uppercase font-bold mb-1">Top Percentile</div>
-                                <div class="text-lg md:text-2xl font-black text-orange-500" id="lc-top-percent">--%</div>
+                                <div class="text-lg md:text-2xl font-black text-orange-500" id="lc-top-percent">--%
+                                </div>
                             </div>
                             <div class="text-center md:text-left">
                                 <div class="text-[10px] text-zinc-400 uppercase font-bold mb-1">Reputation</div>
@@ -321,12 +471,14 @@
     <!-- EXPERTISE GRID -->
     <section id="expertise" class="py-16 md:py-20 px-4 md:px-6 bg-white border-y border-zinc-100">
         <div class="max-w-6xl mx-auto">
-            <h2 class="font-grotesk text-3xl md:text-5xl font-bold mb-12 tracking-tight text-zinc-900">Technical <span class="text-zinc-400">Stack.</span></h2>
-            
+            <h2 class="font-grotesk text-3xl md:text-5xl font-bold mb-12 tracking-tight text-zinc-900">Technical <span
+                    class="text-zinc-400">Stack.</span></h2>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <!-- Languages (Highlighted JS and SQL) -->
                 <div class="bento-card bg-zinc-50 lg:row-span-2 border-none">
-                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">01 // Languages</span>
+                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">01 //
+                        Languages</span>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="bg-white p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fab fa-python text-2xl text-zinc-800"></i>
@@ -336,15 +488,17 @@
                             <i class="fab fa-java text-2xl text-zinc-800"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Java</span>
                         </div>
-                        
+
                         <!-- Highlighted JavaScript -->
-                        <div class="bg-orange-50 border border-orange-200 p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div
+                            class="bg-orange-50 border border-orange-200 p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fab fa-js text-2xl text-orange-500"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-orange-600">JS</span>
                         </div>
 
                         <!-- Highlighted SQL -->
-                        <div class="bg-orange-50 border border-orange-200 p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
+                        <div
+                            class="bg-orange-50 border border-orange-200 p-3 md:p-4 rounded-xl shadow-sm flex flex-col items-center gap-2">
                             <i class="fas fa-database text-2xl text-orange-500"></i>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-orange-600">SQL</span>
                         </div>
@@ -362,7 +516,8 @@
 
                 <!-- Web Stack -->
                 <div class="bento-card lg:col-span-3">
-                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">02 // Backend & Web</span>
+                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">02 //
+                        Backend & Web</span>
                     <div class="flex flex-wrap gap-2">
                         <span class="pill pill-accent">DJANGO</span>
                         <span class="pill pill-accent">JAVASCRIPT (ES6+)</span>
@@ -377,7 +532,8 @@
 
                 <!-- Problem Solving -->
                 <div class="bento-card lg:col-span-2">
-                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">03 // Problem Solving</span>
+                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">03 //
+                        Problem Solving</span>
                     <div class="flex flex-wrap gap-2">
                         <span class="pill">ARRAYS & STRINGS</span>
                         <span class="pill">LINKED LISTS</span>
@@ -394,7 +550,8 @@
 
                 <!-- Core CS -->
                 <div class="bento-card lg:col-span-1">
-                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">04 // Core CS</span>
+                    <span class="text-orange-500 font-mono text-[10px] uppercase mb-6 block tracking-widest">04 // Core
+                        CS</span>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-zinc-900">DBMS</span>
@@ -419,22 +576,36 @@
     <!-- PROJECTS -->
     <section id="projects" class="py-16 md:py-20 px-4 md:px-6">
         <div class="max-w-6xl mx-auto">
-            <h2 class="font-grotesk text-3xl md:text-5xl font-bold mb-12 tracking-tight">Selected <span class="text-zinc-400">Works.</span></h2>
-            
+            <h2 class="font-grotesk text-3xl md:text-5xl font-bold mb-12 tracking-tight">Selected <span
+                    class="text-zinc-400">Works.</span></h2>
+
             <div class="space-y-10">
                 <!-- NoteShare -->
                 <div class="bento-card !p-0 overflow-hidden" data-aos="fade-up">
                     <div class="grid grid-cols-1 md:grid-cols-2 h-full">
                         <!-- Swiper adjusted for Aspect Ratio -->
                         <div class="order-1 md:order-2 bg-zinc-100 relative p-6">
-                            <div class="swiper project-swiper aspect-video w-full rounded-lg shadow-xl overflow-hidden bg-white">
+                            <div
+                                class="swiper project-swiper aspect-video w-full rounded-lg shadow-xl overflow-hidden bg-white">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="h-full w-full object-contain" alt="Project Image 1"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="h-full w-full object-contain" alt="Project Image 2"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU" class="h-full w-full object-contain" alt="Project Image 3"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A" class="h-full w-full object-contain" alt="Project Image 1"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi" class="h-full w-full object-contain" alt="Project Image 2"></div>
-                                    <div class="swiper-slide flex items-center justify-center"><img src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU" class="h-full w-full object-contain" alt="Project Image 3"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img
+                                            src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A"
+                                            class="h-full w-full object-contain" alt="Project Image 1"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img
+                                            src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi"
+                                            class="h-full w-full object-contain" alt="Project Image 2"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img
+                                            src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU"
+                                            class="h-full w-full object-contain" alt="Project Image 3"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img
+                                            src="https://lh3.googleusercontent.com/d/1PA572AwT7pExPsh68WGvLqRWcNsnxo-A"
+                                            class="h-full w-full object-contain" alt="Project Image 1"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img
+                                            src="https://lh3.googleusercontent.com/d/1KDrSMR6pHDU1p2DqdqdDsuiw6FaRSTLi"
+                                            class="h-full w-full object-contain" alt="Project Image 2"></div>
+                                    <div class="swiper-slide flex items-center justify-center"><img
+                                            src="https://lh3.googleusercontent.com/d/1cYXTW0qzegW5CWmxcVsb4GUW4zI2IqGU"
+                                            class="h-full w-full object-contain" alt="Project Image 3"></div>
                                 </div>
                                 <div class="swiper-pagination"></div>
                             </div>
@@ -443,13 +614,16 @@
                         <div class="p-6 md:p-10 flex flex-col justify-between order-2 md:order-1">
                             <div>
                                 <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-                                    <h3 class="text-2xl md:text-3xl font-bold font-grotesk tracking-tight">NoteShare</h3>
+                                    <h3 class="text-2xl md:text-3xl font-bold font-grotesk tracking-tight">NoteShare
+                                    </h3>
                                     <a href="https://noteshare-8nvp.onrender.com" target="_blank" class="btn-live">
                                         <i class="fas fa-satellite-dish animate-pulse text-[10px]"></i> Live Demo
                                     </a>
                                 </div>
                                 <p class="text-zinc-500 text-sm md:text-base leading-relaxed mb-6">
-                                    <strong class="text-zinc-900">Django & AJAX : </strong>A modern note-sharing platform featuring <span class="text-zinc-900 font-bold">Email Registration</span>, smart search, user feedback (ratings + comments), and built-in AI assistance.
+                                    <strong class="text-zinc-900">Django & AJAX : </strong>A modern note-sharing
+                                    platform featuring <span class="text-zinc-900 font-bold">Email Registration</span>,
+                                    smart search, user feedback (ratings + comments), and built-in AI assistance.
                                 </p>
                                 <div class="flex flex-wrap gap-2 mb-8">
                                     <span class="pill bg-zinc-100 text-zinc-600">Django</span>
@@ -467,21 +641,30 @@
                 <!-- Derivatives -->
                 <div class="bento-card" data-aos="fade-up">
                     <div class="flex flex-col md:flex-row gap-8 items-center">
-                        <div class="w-full md:w-1/3 shrink-0 bg-zinc-50 rounded-2xl p-6 flex items-center justify-center border border-zinc-100 aspect-video md:aspect-auto">
-                            <img src="https://lh3.googleusercontent.com/d/1YwP39rczfsV0Goiq0RtIYRqtKjLAyOZV" class="w-full h-full object-contain drop-shadow-lg opacity-90" alt="Derivatives Project">
+                        <div
+                            class="w-full md:w-1/3 shrink-0 bg-zinc-50 rounded-2xl p-6 flex items-center justify-center border border-zinc-100 aspect-video md:aspect-auto">
+                            <img src="https://lh3.googleusercontent.com/d/1YwP39rczfsV0Goiq0RtIYRqtKjLAyOZV"
+                                class="w-full h-full object-contain drop-shadow-lg opacity-90"
+                                alt="Derivatives Project">
                         </div>
                         <div class="flex-1 w-full">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="h-[1px] w-8 bg-orange-500"></span>
-                                <span class="text-orange-500 font-mono text-xs uppercase font-bold">Algorithm Design</span>
+                                <span class="text-orange-500 font-mono text-xs uppercase font-bold">Algorithm
+                                    Design</span>
                             </div>
                             <h3 class="text-2xl md:text-3xl font-bold mb-4 font-grotesk">Derivatives 5.3</h3>
                             <p class="text-zinc-500 text-sm md:text-base leading-relaxed mb-6">
-                                A zero-dependency symbolic math engine in Python with a custom <span class="text-zinc-900 font-bold">Recursive Parser</span> for trigonometric and transcendental expressions, computing derivatives with high precision.
+                                A zero-dependency symbolic math engine in Python with a custom <span
+                                    class="text-zinc-900 font-bold">Recursive Parser</span> for trigonometric and
+                                transcendental expressions, computing derivatives with high precision.
                             </p>
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="https://github.com/rodeatharva04/Derivatives-v5" class="btn-outline justify-center"><i class="fab fa-github"></i> Source</a>
-                                <a href="https://drive.google.com/file/d/1sJsNNP9ugzwchH4LtwWTS1JCxFtqlI2Q/view" class="text-zinc-500 hover:text-orange-500 text-xs font-bold flex items-center justify-center gap-2 py-2"><i class="fas fa-file-pdf"></i> Architecture</a>
+                                <a href="https://github.com/rodeatharva04/Derivatives-v5"
+                                    class="btn-outline justify-center"><i class="fab fa-github"></i> Source</a>
+                                <a href="https://drive.google.com/file/d/1sJsNNP9ugzwchH4LtwWTS1JCxFtqlI2Q/view"
+                                    class="text-zinc-500 hover:text-orange-500 text-xs font-bold flex items-center justify-center gap-2 py-2"><i
+                                        class="fas fa-file-pdf"></i> Architecture</a>
                             </div>
                         </div>
                     </div>
@@ -494,45 +677,55 @@
     <section id="experience" class="py-16 md:py-20 px-4 md:px-6 bg-zinc-50 border-y border-zinc-100">
         <div class="max-w-6xl mx-auto">
             <h2 class="font-grotesk text-3xl md:text-5xl font-bold mb-12 tracking-tight text-zinc-900">Experience.</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Text Details -->
                 <div class="bento-card md:col-span-2 relative overflow-hidden bg-white" data-aos="fade-right">
                     <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-orange-500"></div>
-                    
+
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-2">
                         <div>
-                            <span class="text-orange-500 font-bold text-[10px] uppercase mb-1 block tracking-wider">Internship</span>
-                            <h3 class="text-xl md:text-2xl font-bold font-grotesk text-zinc-900">Web Development Intern</h3>
-                            <div class="text-zinc-500 text-xs font-bold uppercase tracking-wider mt-1">EY GDS & AICTE <span class="mx-2 text-zinc-300">•</span> Remote</div>
+                            <span
+                                class="text-orange-500 font-bold text-[10px] uppercase mb-1 block tracking-wider">Internship</span>
+                            <h3 class="text-xl md:text-2xl font-bold font-grotesk text-zinc-900">Web Development Intern
+                            </h3>
+                            <div class="text-zinc-500 text-xs font-bold uppercase tracking-wider mt-1">EY GDS & AICTE
+                                <span class="mx-2 text-zinc-300">•</span> Remote</div>
                         </div>
-                        <span class="px-4 py-1.5 bg-zinc-100 rounded-full text-xs font-bold text-zinc-600 whitespace-nowrap w-fit mt-2 sm:mt-0">
+                        <span
+                            class="px-4 py-1.5 bg-zinc-100 rounded-full text-xs font-bold text-zinc-600 whitespace-nowrap w-fit mt-2 sm:mt-0">
                             Feb 2025 — Mar 2025
                         </span>
                     </div>
-                    
+
                     <div class="space-y-3">
                         <div class="flex gap-4 items-start">
                             <i class="fas fa-check-circle text-orange-500 mt-1 shrink-0"></i>
-                            <p class="text-zinc-600 text-sm leading-relaxed">Managed data persistence and <span class="font-bold text-zinc-800">CRUD</span> operations with clean backend logic.</p>
+                            <p class="text-zinc-600 text-sm leading-relaxed">Managed data persistence and <span
+                                    class="font-bold text-zinc-800">CRUD</span> operations with clean backend logic.</p>
                         </div>
                         <div class="flex gap-4 items-start">
                             <i class="fas fa-check-circle text-orange-500 mt-1 shrink-0"></i>
-                            <p class="text-zinc-600 text-sm leading-relaxed">Built secure user authentication and account workflows.</p>
+                            <p class="text-zinc-600 text-sm leading-relaxed">Built secure user authentication and
+                                account workflows.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Internship Certificate -->
-                <a href="https://drive.google.com/file/d/1gMiEfuD8uubi0r1dgJDzYTgdRSDdPnQ_/view" target="_blank" class="bento-card group flex flex-col items-center justify-center bg-orange-50 border-orange-200 hover:bg-orange-100 transition-colors cursor-pointer text-center gap-4 py-10" data-aos="fade-left">
-                     <div class="w-16 h-16 rounded-full bg-white flex items-center justify-center text-orange-500 shadow-sm group-hover:scale-110 transition-transform">
+                <a href="https://drive.google.com/file/d/1gMiEfuD8uubi0r1dgJDzYTgdRSDdPnQ_/view" target="_blank"
+                    class="bento-card group flex flex-col items-center justify-center bg-orange-50 border-orange-200 hover:bg-orange-100 transition-colors cursor-pointer text-center gap-4 py-10"
+                    data-aos="fade-left">
+                    <div
+                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center text-orange-500 shadow-sm group-hover:scale-110 transition-transform">
                         <i class="fas fa-award text-2xl"></i>
-                     </div>
-                     <div>
+                    </div>
+                    <div>
                         <span class="text-xs font-bold text-orange-600 uppercase block mb-1">Verified Credential</span>
                         <h4 class="text-lg font-bold text-zinc-900 leading-tight">Internship Certificate</h4>
-                        <div class="text-[10px] text-zinc-500 mt-2">View Document <i class="fas fa-arrow-right ml-1"></i></div>
-                     </div>
+                        <div class="text-[10px] text-zinc-500 mt-2">View Document <i
+                                class="fas fa-arrow-right ml-1"></i></div>
+                    </div>
                 </a>
             </div>
         </div>
@@ -541,26 +734,45 @@
     <!-- CREDENTIALS -->
     <section id="certificates" class="py-16 md:py-20 px-4 md:px-6">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 font-grotesk"><i class="fas fa-certificate text-zinc-400"></i>Credentials</h2>
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3 font-grotesk"><i
+                    class="fas fa-certificate text-zinc-400"></i>Credentials</h2>
             <!-- Adjusted Grid for Mobile -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <a href="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 1">
+                <a href="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S" target="_blank"
+                    class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
+                    <img src="https://lh3.googleusercontent.com/d/1LLPe-NyRzAb0sMFWu9n2Ol9nphRGJQ7S"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt="Credential 1">
                 </a>
-                <a href="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 2">
+                <a href="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf" target="_blank"
+                    class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
+                    <img src="https://lh3.googleusercontent.com/d/1GXMeA9ZJh5KiKTyc_EFziqW1iRl_LICf"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt="Credential 2">
                 </a>
-                <a href="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 3">
+                <a href="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV" target="_blank"
+                    class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
+                    <img src="https://lh3.googleusercontent.com/d/1W8ZTKgjSysNjr3lY82E4JnT8JOZsO-OV"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt="Credential 3">
                 </a>
-                <a href="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 4">
+                <a href="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e" target="_blank"
+                    class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
+                    <img src="https://lh3.googleusercontent.com/d/1k2d3qkJBLa5BAI69Eo55LiRfuMtO8x7e"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt="Credential 4">
                 </a>
-                <a href="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 5">
+                <a href="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h" target="_blank"
+                    class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
+                    <img src="https://lh3.googleusercontent.com/d/1tDwVkPGBnEhWrQq6dMkUae6pIfPaLi2h"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt="Credential 5">
                 </a>
-                <a href="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" target="_blank" class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
-                    <img src="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Credential 6">
+                <a href="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI" target="_blank"
+                    class="group aspect-video rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200 cursor-pointer shadow-sm hover:shadow-lg transition-all relative block">
+                    <img src="https://lh3.googleusercontent.com/d/1CcUuMpQV1BHGesKz45oQYG0ayyPppvTI"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        alt="Credential 6">
                 </a>
             </div>
         </div>
@@ -570,9 +782,13 @@
     <footer class="py-12 border-t border-zinc-200 bg-white text-center px-4">
         <h2 class="text-2xl font-black tracking-tight text-zinc-900 mb-8 font-grotesk">rodeatharva2@gmail.com</h2>
         <div class="flex justify-center gap-8 mb-8">
-            <a href="https://github.com/rodeatharva04" target="_blank" class="text-zinc-400 hover:text-black transition-colors"><i class="fab fa-github text-2xl"></i></a>
-            <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank" class="text-zinc-400 hover:text-[#0077b5] transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
-            <a href="mailto:rodeatharva2@gmail.com" class="text-zinc-400 hover:text-orange-500 transition-colors"><i class="fas fa-envelope text-2xl"></i></a>
+            <a href="https://github.com/rodeatharva04" target="_blank"
+                class="text-zinc-400 hover:text-black transition-colors"><i class="fab fa-github text-2xl"></i></a>
+            <a href="https://linkedin.com/in/atharva-rode-95a6b5271" target="_blank"
+                class="text-zinc-400 hover:text-[#0077b5] transition-colors"><i
+                    class="fab fa-linkedin text-2xl"></i></a>
+            <a href="mailto:rodeatharva2@gmail.com" class="text-zinc-400 hover:text-orange-500 transition-colors"><i
+                    class="fas fa-envelope text-2xl"></i></a>
         </div>
         <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">© 2026 Engineered for Performance</p>
     </footer>
@@ -582,7 +798,7 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 40 });
-        
+
         // Mobile Navigation Logic
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -591,7 +807,7 @@
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('nav-open');
-            if(mobileMenu.classList.contains('nav-open')) {
+            if (mobileMenu.classList.contains('nav-open')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
             } else {
@@ -609,72 +825,148 @@
             });
         });
 
-        new Swiper('.project-swiper', { 
+        new Swiper('.project-swiper', {
             loop: true, speed: 1000,
-            autoplay: { delay: 4000, disableOnInteraction: false }, 
+            autoplay: { delay: 4000, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
             effect: 'fade', fadeEffect: { crossFade: true }
         });
 
+        // Updated LeetCode fetch function with multiple API fallbacks
         async function fetchLC() {
-            try {
-                const res = await fetch('https://leetcode-stats-api.herokuapp.com/rodeatharva');
-                const d = await res.json();
-                if (d.status === 'success') {
-                    const animateValue = (id, start, end, duration) => {
-                        let obj = document.getElementById(id); if(!obj) return;
-                        let range = end - start;
-                        let stepTime = Math.max(Math.abs(Math.floor(duration / range)), 50);
-                        let startTime = new Date().getTime();
-                        let endTime = startTime + duration;
-                        let timer;
-                        function run() {
-                            let now = new Date().getTime();
-                            let remaining = Math.max((endTime - now) / duration, 0);
-                            let value = Math.round(end - (remaining * range));
-                            obj.innerHTML = value;
-                            if (value == end) clearInterval(timer);
-                        }
-                        timer = setInterval(run, stepTime); run();
-                    };
+            const username = 'rodeatharva';
 
-                    animateValue("lc-total", 0, d.totalSolved, 2000);
-                    animateValue("lc-easy-val", 0, d.easySolved, 2000);
-                    animateValue("lc-medium-val", 0, d.mediumSolved, 2000);
-                    animateValue("lc-hard-val", 0, d.hardSolved, 2000);
-                    
-                    document.getElementById('lc-rate').innerText = d.acceptanceRate + "%";
-                    document.getElementById('lc-rank').innerText = d.ranking.toLocaleString();
-                    document.getElementById('lc-rep').innerText = d.reputation;
-                    document.getElementById('lc-contrib').innerText = d.contributionPoints;
-
-                    let estimatedUsers = 5000000;
-                    let topPercent = (d.ranking / estimatedUsers) * 100;
-                    let percentText = topPercent < 1 ? "Top <1%" : `Top ${topPercent.toFixed(1)}%`;
-                    document.getElementById('lc-top-percent').innerText = percentText;
-
-                    const total = d.totalSolved;
-                    const easyDeg = (d.easySolved / total) * 360;
-                    const medDeg = (d.mediumSolved / total) * 360 + easyDeg;
-                    const hardDeg = (d.hardSolved / total) * 360 + medDeg;
-
-                    const circle = document.getElementById('lc-circle');
-                    setTimeout(() => {
-                        circle.style.setProperty('--easy-deg', `${easyDeg}deg`);
-                        circle.style.setProperty('--med-deg', `${medDeg}deg`);
-                        circle.style.setProperty('--hard-deg', `${hardDeg}deg`);
-                    }, 500);
-
-                    setTimeout(() => {
-                        document.getElementById('lc-easy-bar').style.width = (d.easySolved / d.totalQuestions * 100) + '%';
-                        document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / d.totalQuestions * 100) + '%';
-                        document.getElementById('lc-hard-bar').style.width = (d.hardSolved / d.totalQuestions * 100) + '%';
-                        document.getElementById('lc-rate-bar').style.width = d.acceptanceRate + '%';
-                    }, 500);
+            // Try multiple API endpoints in order
+            const apiEndpoints = [
+                {
+                    url: `https://alfa-leetcode-api.onrender.com/${username}/solved`,
+                    parser: (data) => {
+                        return {
+                            totalSolved: data.solvedProblem || 0,
+                            easySolved: data.easySolved || 0,
+                            mediumSolved: data.mediumSolved || 0,
+                            hardSolved: data.hardSolved || 0,
+                            acceptanceRate: parseFloat(data.acceptanceRate || 0),
+                            ranking: data.ranking || 0,
+                            reputation: data.reputation || 0,
+                            contributionPoints: data.contributionPoint || 0,
+                            totalQuestions: 3000 // Approximation
+                        };
+                    }
+                },
+                {
+                    url: `https://leetcode-stats-api.herokuapp.com/${username}`,
+                    parser: (data) => {
+                        if (data.status !== 'success') throw new Error('API returned non-success status');
+                        return {
+                            totalSolved: data.totalSolved,
+                            easySolved: data.easySolved,
+                            mediumSolved: data.mediumSolved,
+                            hardSolved: data.hardSolved,
+                            acceptanceRate: parseFloat(data.acceptanceRate),
+                            ranking: data.ranking,
+                            reputation: data.reputation,
+                            contributionPoints: data.contributionPoints,
+                            totalQuestions: data.totalQuestions
+                        };
+                    }
                 }
-            } catch (e) { console.error("LeetCode API Error", e); document.getElementById('lc-total').innerText = "N/A"; }
+            ];
+
+            for (const endpoint of apiEndpoints) {
+                try {
+                    console.log(`Trying API: ${endpoint.url}`);
+                    const res = await fetch(endpoint.url);
+
+                    if (!res.ok) {
+                        console.log(`API returned status ${res.status}, trying next...`);
+                        continue;
+                    }
+
+                    const rawData = await res.json();
+                    console.log('Raw API response:', rawData);
+
+                    const d = endpoint.parser(rawData);
+
+                    // Validate we got valid data
+                    if (d.totalSolved > 0) {
+                        console.log('Successfully fetched data:', d);
+                        updateUI(d);
+                        return;
+                    } else {
+                        console.log('API returned zero problems, trying next...');
+                    }
+                } catch (e) {
+                    console.error(`Error with ${endpoint.url}:`, e);
+                }
+            }
+
+            // If all APIs fail, show error
+            console.error("All LeetCode APIs failed");
+            document.getElementById('lc-total').innerText = "N/A";
+            document.getElementById('lc-total').parentElement.parentElement.innerHTML +=
+                '<div class="text-xs text-red-500 mt-4 text-center">Unable to load stats. Please check back later.</div>';
         }
+
+        function updateUI(d) {
+            const animateValue = (id, start, end, duration) => {
+                let obj = document.getElementById(id);
+                if (!obj) return;
+                let range = end - start;
+                let stepTime = Math.max(Math.abs(Math.floor(duration / range)), 50);
+                let startTime = new Date().getTime();
+                let endTime = startTime + duration;
+                let timer;
+
+                function run() {
+                    let now = new Date().getTime();
+                    let remaining = Math.max((endTime - now) / duration, 0);
+                    let value = Math.round(end - (remaining * range));
+                    obj.innerHTML = value;
+                    if (value == end) clearInterval(timer);
+                }
+                timer = setInterval(run, stepTime);
+                run();
+            };
+
+            animateValue("lc-total", 0, d.totalSolved, 2000);
+            animateValue("lc-easy-val", 0, d.easySolved, 2000);
+            animateValue("lc-medium-val", 0, d.mediumSolved, 2000);
+            animateValue("lc-hard-val", 0, d.hardSolved, 2000);
+
+            document.getElementById('lc-rate').innerText = d.acceptanceRate.toFixed(1) + "%";
+            document.getElementById('lc-rank').innerText = d.ranking.toLocaleString();
+            document.getElementById('lc-rep').innerText = d.reputation;
+            document.getElementById('lc-contrib').innerText = d.contributionPoints;
+
+            let estimatedUsers = 5000000;
+            let topPercent = (d.ranking / estimatedUsers) * 100;
+            let percentText = topPercent < 1 ? "Top <1%" : `Top ${topPercent.toFixed(1)}%`;
+            document.getElementById('lc-top-percent').innerText = percentText;
+
+            const total = d.totalSolved;
+            const easyDeg = (d.easySolved / total) * 360;
+            const medDeg = (d.mediumSolved / total) * 360 + easyDeg;
+            const hardDeg = (d.hardSolved / total) * 360 + medDeg;
+
+            const circle = document.getElementById('lc-circle');
+            setTimeout(() => {
+                circle.style.setProperty('--easy-deg', `${easyDeg}deg`);
+                circle.style.setProperty('--med-deg', `${medDeg}deg`);
+                circle.style.setProperty('--hard-deg', `${hardDeg}deg`);
+            }, 500);
+
+            setTimeout(() => {
+                document.getElementById('lc-easy-bar').style.width = (d.easySolved / d.totalQuestions * 100) + '%';
+                document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / d.totalQuestions * 100) + '%';
+                document.getElementById('lc-hard-bar').style.width = (d.hardSolved / d.totalQuestions * 100) + '%';
+                document.getElementById('lc-rate-bar').style.width = d.acceptanceRate + '%';
+            }, 500);
+        }
+
+        // Fetch on page load
         fetchLC();
     </script>
 </body>
+
 </html>
