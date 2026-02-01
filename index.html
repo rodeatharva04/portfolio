@@ -378,89 +378,76 @@
     <section id="stats" class="py-12 px-4 md:px-6" data-leetcode-username="rodeatharva">
         <div class="max-w-6xl mx-auto">
             <div class="bento-card" data-aos="fade-up">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-8 pb-6 border-b border-zinc-100">
+                    <div class="flex items-center gap-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                            class="w-6 h-6 md:w-8 md:h-8 opacity-90" alt="LeetCode Logo">
+                        <div>
+                            <h3 class="text-base md:text-lg font-bold font-grotesk">LeetCode Performance</h3>
+                            <p class="text-[10px] md:text-xs text-zinc-400">Live Problem Solving Stats</p>
+                        </div>
+                    </div>
+                    <a href="https://leetcode.com/u/rodeatharva/" target="_blank"
+                        class="text-[10px] md:text-xs font-bold uppercase text-orange-500 hover:underline">View
+                        Profile <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+
+                <!-- Main Content -->
                 <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
                     <!-- Radial Chart -->
                     <div class="lc-radial shrink-0" id="lc-circle">
                         <div class="lc-content">
-                            <div class="text-2xl md:text-4xl font-grotesk font-bold text-zinc-900" id="lc-total">--
+                            <div class="text-3xl md:text-5xl font-grotesk font-bold text-zinc-900" id="lc-total">--
                             </div>
-                            <div class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Solved</div>
+                            <div class="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Solved</div>
                         </div>
                     </div>
 
-                    <!-- Content -->
+                    <!-- Stats Grid -->
                     <div class="flex-1 w-full">
-                        <div class="flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
-                            <div class="flex items-center gap-3">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
-                                    class="w-6 h-6 md:w-8 md:h-8 opacity-90" alt="LeetCode Logo">
-                                <div>
-                                    <h3 class="text-base md:text-lg font-bold font-grotesk">LeetCode Performance</h3>
-                                    <p class="text-[10px] md:text-xs text-zinc-400">Live Statistics</p>
-                                </div>
-                            </div>
-                            <a href="https://leetcode.com/u/rodeatharva/" target="_blank"
-                                class="text-[10px] md:text-xs font-bold uppercase text-orange-500 hover:underline">View
-                                Profile <i class="fas fa-external-link-alt ml-1"></i></a>
-                        </div>
-
-                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span
-                                        class="text-emerald-600">Easy</span><span id="lc-easy-val"
-                                        class="text-zinc-900">0</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
+                        <div class="grid grid-cols-3 gap-6">
+                            <!-- Easy -->
+                            <div class="text-center">
+                                <div class="text-[10px] font-bold uppercase text-emerald-600 mb-2">Easy</div>
+                                <div class="text-3xl md:text-4xl font-black text-zinc-900 mb-3" id="lc-easy-val">0</div>
+                                <div class="h-2 bg-zinc-100 rounded-full overflow-hidden">
                                     <div id="lc-easy-bar"
-                                        class="h-full bg-emerald-500 w-0 transition-all duration-1000"></div>
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span
-                                        class="text-amber-500">Medium</span><span id="lc-medium-val"
-                                        class="text-zinc-900">0</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
-                                    <div id="lc-medium-bar"
-                                        class="h-full bg-amber-500 w-0 transition-all duration-1000"></div>
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span
-                                        class="text-red-500">Hard</span><span id="lc-hard-val"
-                                        class="text-zinc-900">0</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
-                                    <div id="lc-hard-bar" class="h-full bg-red-500 w-0 transition-all duration-1000">
+                                        class="h-full bg-gradient-to-r from-emerald-400 to-emerald-500 w-0 transition-all duration-1000">
                                     </div>
                                 </div>
                             </div>
-                            <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold uppercase"><span
-                                        class="text-purple-500">Acceptance</span><span id="lc-rate"
-                                        class="text-zinc-900">0%</span></div>
-                                <div class="h-1.5 bg-zinc-100 rounded-full overflow-hidden">
-                                    <div id="lc-rate-bar" class="h-full bg-purple-500 w-0 transition-all duration-1000">
+
+                            <!-- Medium -->
+                            <div class="text-center">
+                                <div class="text-[10px] font-bold uppercase text-amber-500 mb-2">Medium</div>
+                                <div class="text-3xl md:text-4xl font-black text-zinc-900 mb-3" id="lc-medium-val">0
+                                </div>
+                                <div class="h-2 bg-zinc-100 rounded-full overflow-hidden">
+                                    <div id="lc-medium-bar"
+                                        class="h-full bg-gradient-to-r from-amber-400 to-amber-500 w-0 transition-all duration-1000">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hard -->
+                            <div class="text-center">
+                                <div class="text-[10px] font-bold uppercase text-red-500 mb-2">Hard</div>
+                                <div class="text-3xl md:text-4xl font-black text-zinc-900 mb-3" id="lc-hard-val">0</div>
+                                <div class="h-2 bg-zinc-100 rounded-full overflow-hidden">
+                                    <div id="lc-hard-bar"
+                                        class="h-full bg-gradient-to-r from-red-400 to-red-500 w-0 transition-all duration-1000">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-6 border-t border-zinc-100">
-                            <div class="text-center md:text-left">
-                                <div class="text-[10px] text-zinc-400 uppercase font-bold mb-1">Global Rank</div>
-                                <div class="text-lg md:text-2xl font-black text-zinc-900" id="lc-rank">--</div>
-                            </div>
-                            <div class="text-center md:text-left">
-                                <div class="text-[10px] text-orange-500 uppercase font-bold mb-1">Top Percentile</div>
-                                <div class="text-lg md:text-2xl font-black text-orange-500" id="lc-top-percent">--%
-                                </div>
-                            </div>
-                            <div class="text-center md:text-left">
-                                <div class="text-[10px] text-zinc-400 uppercase font-bold mb-1">Reputation</div>
-                                <div class="text-lg md:text-2xl font-black text-zinc-900" id="lc-rep">--</div>
-                            </div>
-                            <div class="text-center md:text-left">
-                                <div class="text-[10px] text-zinc-400 uppercase font-bold mb-1">Contrib. Points</div>
-                                <div class="text-lg md:text-2xl font-black text-zinc-900" id="lc-contrib">--</div>
-                            </div>
+                        <!-- Footer Text -->
+                        <div class="mt-8 pt-6 border-t border-zinc-100 text-center">
+                            <p class="text-xs text-zinc-400">
+                                <i class="fas fa-chart-line mr-2 text-orange-500"></i>
+                                Consistently solving algorithmic challenges across all difficulty levels
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -930,33 +917,7 @@
             animateValue("lc-medium-val", 0, d.mediumSolved, 2000);
             animateValue("lc-hard-val", 0, d.hardSolved, 2000);
 
-            document.getElementById('lc-rate').innerText = d.acceptanceRate.toFixed(1) + "%";
-
-            // Only show ranking if available, otherwise hide or show N/A
-            const rankElem = document.getElementById('lc-rank');
-            rankElem.innerText = d.ranking > 0 ? d.ranking.toLocaleString() : 'N/A';
-
-            const repElem = document.getElementById('lc-rep');
-            repElem.innerText = d.reputation > 0 ? d.reputation : 'N/A';
-
-            const contribElem = document.getElementById('lc-contrib');
-            contribElem.innerText = d.contributionPoints > 0 ? Math.round(d.contributionPoints) : 'N/A';
-
-            // Calculate top percentile dynamically (only if ranking is available)
-            const percentElem = document.getElementById('lc-top-percent');
-            if (d.ranking > 0) {
-                const estimatedUsers = 5000000;
-                const topPercent = (d.ranking / estimatedUsers) * 100;
-                const percentText = topPercent < 0.1
-                    ? `Top ${topPercent.toFixed(2)}%`
-                    : topPercent < 1
-                        ? `Top ${topPercent.toFixed(1)}%`
-                        : `Top ${topPercent.toFixed(1)}%`;
-                percentElem.innerText = percentText;
-            } else {
-                percentElem.innerText = 'N/A';
-            }
-
+            // Update radial chart
             const total = d.totalSolved;
             if (total > 0) {
                 const easyDeg = (d.easySolved / total) * 360;
@@ -971,18 +932,18 @@
                 }, 500);
             }
 
+            // Animate progress bars
             setTimeout(() => {
                 if (d.totalEasy) {
                     document.getElementById('lc-easy-bar').style.width = (d.easySolved / d.totalEasy * 100) + '%';
                     document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / d.totalMedium * 100) + '%';
                     document.getElementById('lc-hard-bar').style.width = (d.hardSolved / d.totalHard * 100) + '%';
                 } else {
-                    // Fallback if we don't have total questions
+                    // Fallback percentages
                     document.getElementById('lc-easy-bar').style.width = (d.easySolved / 800 * 100) + '%';
                     document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / 1700 * 100) + '%';
                     document.getElementById('lc-hard-bar').style.width = (d.hardSolved / 700 * 100) + '%';
                 }
-                document.getElementById('lc-rate-bar').style.width = d.acceptanceRate + '%';
             }, 500);
         }
 
