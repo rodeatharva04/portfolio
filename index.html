@@ -925,15 +925,21 @@
                 const totalAC = getCount(totalSubmissions, 'All');
                 const acceptanceRate = totalAC > 0 ? (totalSolved / totalAC) * 100 : 0;
 
+                // Handle null values - use contest rating for contribution points if available
+                const ranking = user.profile?.ranking || 0;
+                const reputation = user.profile?.reputation || 0;
+                const contributionPoints = user.userContestRanking?.rating ||
+                    user.userContestRanking?.attendedContestsCount || 0;
+
                 const data = {
                     totalSolved,
                     easySolved,
                     mediumSolved,
                     hardSolved,
                     acceptanceRate,
-                    ranking: user.profile.ranking || 0,
-                    reputation: user.profile.reputation || 0,
-                    contributionPoints: user.userContestRanking?.attendedContestsCount || 0,
+                    ranking,
+                    reputation,
+                    contributionPoints,
                     totalQuestions,
                     totalEasy,
                     totalMedium,
@@ -979,19 +985,31 @@
             animateValue("lc-hard-val", 0, d.hardSolved, 2000);
 
             document.getElementById('lc-rate').innerText = d.acceptanceRate.toFixed(1) + "%";
-            document.getElementById('lc-rank').innerText = d.ranking.toLocaleString();
-            document.getElementById('lc-rep').innerText = d.reputation;
-            document.getElementById('lc-contrib').innerText = d.contributionPoints;
 
-            // Calculate top percentile dynamically
-            const estimatedUsers = 5000000;
-            const topPercent = (d.ranking / estimatedUsers) * 100;
-            const percentText = topPercent < 0.1
-                ? `Top ${topPercent.toFixed(2)}%`
-                : topPercent < 1
-                    ? `Top ${topPercent.toFixed(1)}%`
-                    : `Top ${topPercent.toFixed(1)}%`;
-            document.getElementById('lc-top-percent').innerText = percentText;
+            // Only show ranking if available, otherwise hide or show N/A
+            const rankElem = document.getElementById('lc-rank');
+            rankElem.innerText = d.ranking > 0 ? d.ranking.toLocaleString() : 'N/A';
+
+            const repElem = document.getElementById('lc-rep');
+            repElem.innerText = d.reputation > 0 ? d.reputation : 'N/A';
+
+            const contribElem = document.getElementById('lc-contrib');
+            contribElem.innerText = d.contributionPoints > 0 ? Math.round(d.contributionPoints) : 'N/A';
+
+            // Calculate top percentile dynamically (only if ranking is available)
+            const percentElem = document.getElementById('lc-top-percent');
+            if (d.ranking > 0) {
+                const estimatedUsers = 5000000;
+                const topPercent = (d.ranking / estimatedUsers) * 100;
+                const percentText = topPercent < 0.1
+                    ? `Top ${topPercent.toFixed(2)}%`
+                    : topPercent < 1
+                        ? `Top ${topPercent.toFixed(1)}%`
+                        : `Top ${topPercent.toFixed(1)}%`;
+                percentElem.innerText = percentText;
+            } else {
+                percentElem.innerText = 'N/A';
+            }
 
             const total = d.totalSolved;
             if (total > 0) {
