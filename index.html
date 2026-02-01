@@ -690,7 +690,8 @@
                             <h3 class="text-xl md:text-2xl font-bold font-grotesk text-zinc-900">Web Development Intern
                             </h3>
                             <div class="text-zinc-500 text-xs font-bold uppercase tracking-wider mt-1">EY GDS & AICTE
-                                <span class="mx-2 text-zinc-300">•</span> Remote</div>
+                                <span class="mx-2 text-zinc-300">•</span> Remote
+                            </div>
                         </div>
                         <span
                             class="px-4 py-1.5 bg-zinc-100 rounded-full text-xs font-bold text-zinc-600 whitespace-nowrap w-fit mt-2 sm:mt-0">
@@ -832,80 +833,119 @@
             effect: 'fade', fadeEffect: { crossFade: true }
         });
 
-        // Updated LeetCode fetch function with multiple API fallbacks
+        // LeetCode fetch function using official GraphQL API
         async function fetchLC() {
             const username = 'rodeatharva';
 
-            // Try multiple API endpoints in order
-            const apiEndpoints = [
-                {
-                    url: `https://alfa-leetcode-api.onrender.com/${username}/solved`,
-                    parser: (data) => {
-                        return {
-                            totalSolved: data.solvedProblem || 0,
-                            easySolved: data.easySolved || 0,
-                            mediumSolved: data.mediumSolved || 0,
-                            hardSolved: data.hardSolved || 0,
-                            acceptanceRate: parseFloat(data.acceptanceRate || 0),
-                            ranking: data.ranking || 0,
-                            reputation: data.reputation || 0,
-                            contributionPoints: data.contributionPoint || 0,
-                            totalQuestions: 3000 // Approximation
-                        };
-                    }
-                },
-                {
-                    url: `https://leetcode-stats-api.herokuapp.com/${username}`,
-                    parser: (data) => {
-                        if (data.status !== 'success') throw new Error('API returned non-success status');
-                        return {
-                            totalSolved: data.totalSolved,
-                            easySolved: data.easySolved,
-                            mediumSolved: data.mediumSolved,
-                            hardSolved: data.hardSolved,
-                            acceptanceRate: parseFloat(data.acceptanceRate),
-                            ranking: data.ranking,
-                            reputation: data.reputation,
-                            contributionPoints: data.contributionPoints,
-                            totalQuestions: data.totalQuestions
-                        };
-                    }
+            try {
+                console.log('Fetching LeetCode data using GraphQL API...');
+
+                // Use LeetCode's official GraphQL endpoint
+                const response = await fetch('https://leetcode.com/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Referer': 'https://leetcode.com'
+                    },
+                    body: JSON.stringify({
+                        query: `
+                            query getUserProfile($username: String!) {
+                                matchedUser(username: $username) {
+                                    username
+                                    profile {
+                                        ranking
+                                        reputation
+                                    }
+                                    submitStats {
+                                        acSubmissionNum {
+                                            difficulty
+                                            count
+                                        }
+                                        totalSubmissionNum {
+                                            difficulty
+                                            count
+                                        }
+                                    }
+                                    userContestRanking {
+                                        attendedContestsCount
+                                        rating
+                                    }
+                                }
+                                allQuestionsCount {
+                                    difficulty
+                                    count
+                                }
+                            }
+                        `,
+                        variables: { username }
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            ];
 
-            for (const endpoint of apiEndpoints) {
-                try {
-                    console.log(`Trying API: ${endpoint.url}`);
-                    const res = await fetch(endpoint.url);
+                const result = await response.json();
+                console.log('GraphQL API response:', result);
 
-                    if (!res.ok) {
-                        console.log(`API returned status ${res.status}, trying next...`);
-                        continue;
-                    }
-
-                    const rawData = await res.json();
-                    console.log('Raw API response:', rawData);
-
-                    const d = endpoint.parser(rawData);
-
-                    // Validate we got valid data
-                    if (d.totalSolved > 0) {
-                        console.log('Successfully fetched data:', d);
-                        updateUI(d);
-                        return;
-                    } else {
-                        console.log('API returned zero problems, trying next...');
-                    }
-                } catch (e) {
-                    console.error(`Error with ${endpoint.url}:`, e);
+                if (result.errors) {
+                    throw new Error('GraphQL errors: ' + JSON.stringify(result.errors));
                 }
+
+                const user = result.data.matchedUser;
+                if (!user) {
+                    throw new Error('User not found');
+                }
+
+                // Parse the data
+                const acSubmissions = user.submitStats.acSubmissionNum;
+                const totalSubmissions = user.submitStats.totalSubmissionNum;
+                const allQuestions = result.data.allQuestionsCount;
+
+                // Find counts by difficulty
+                const getCount = (arr, difficulty) => {
+                    const item = arr.find(x => x.difficulty === difficulty);
+                    return item ? item.count : 0;
+                };
+
+                const easySolved = getCount(acSubmissions, 'Easy');
+                const mediumSolved = getCount(acSubmissions, 'Medium');
+                const hardSolved = getCount(acSubmissions, 'Hard');
+                const totalSolved = getCount(acSubmissions, 'All');
+
+                const totalEasy = getCount(allQuestions, 'Easy');
+                const totalMedium = getCount(allQuestions, 'Medium');
+                const totalHard = getCount(allQuestions, 'Hard');
+                const totalQuestions = getCount(allQuestions, 'All');
+
+                const totalAC = getCount(totalSubmissions, 'All');
+                const acceptanceRate = totalAC > 0 ? (totalSolved / totalAC) * 100 : 0;
+
+                const data = {
+                    totalSolved,
+                    easySolved,
+                    mediumSolved,
+                    hardSolved,
+                    acceptanceRate,
+                    ranking: user.profile.ranking || 0,
+                    reputation: user.profile.reputation || 0,
+                    contributionPoints: user.userContestRanking?.attendedContestsCount || 0,
+                    totalQuestions,
+                    totalEasy,
+                    totalMedium,
+                    totalHard
+                };
+
+                console.log('Parsed data:', data);
+                updateUI(data);
+            } catch (error) {
+                console.error('Error fetching LeetCode data:', error);
+                document.getElementById('lc-total').innerText = "N/A";
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'text-xs text-red-500 mt-4 text-center';
+                errorDiv.textContent = 'Unable to load stats. Please refresh the page.';
+                document.getElementById('lc-total').parentElement.parentElement.appendChild(errorDiv);
             }
-
-            // If all APIs fail, show error
-            console.error("All LeetCode APIs failed");
-            document.getElementById('lc-total').innerText = "N/A";
-            document.getElementById('lc-total').parentElement.parentElement.innerHTML +=
-                '<div class="text-xs text-red-500 mt-4 text-center">Unable to load stats. Please check back later.</div>';
         }
 
         function updateUI(d) {
@@ -945,21 +985,30 @@
             document.getElementById('lc-top-percent').innerText = percentText;
 
             const total = d.totalSolved;
-            const easyDeg = (d.easySolved / total) * 360;
-            const medDeg = (d.mediumSolved / total) * 360 + easyDeg;
-            const hardDeg = (d.hardSolved / total) * 360 + medDeg;
+            if (total > 0) {
+                const easyDeg = (d.easySolved / total) * 360;
+                const medDeg = (d.mediumSolved / total) * 360 + easyDeg;
+                const hardDeg = (d.hardSolved / total) * 360 + medDeg;
 
-            const circle = document.getElementById('lc-circle');
-            setTimeout(() => {
-                circle.style.setProperty('--easy-deg', `${easyDeg}deg`);
-                circle.style.setProperty('--med-deg', `${medDeg}deg`);
-                circle.style.setProperty('--hard-deg', `${hardDeg}deg`);
-            }, 500);
+                const circle = document.getElementById('lc-circle');
+                setTimeout(() => {
+                    circle.style.setProperty('--easy-deg', `${easyDeg}deg`);
+                    circle.style.setProperty('--med-deg', `${medDeg}deg`);
+                    circle.style.setProperty('--hard-deg', `${hardDeg}deg`);
+                }, 500);
+            }
 
             setTimeout(() => {
-                document.getElementById('lc-easy-bar').style.width = (d.easySolved / d.totalQuestions * 100) + '%';
-                document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / d.totalQuestions * 100) + '%';
-                document.getElementById('lc-hard-bar').style.width = (d.hardSolved / d.totalQuestions * 100) + '%';
+                if (d.totalEasy) {
+                    document.getElementById('lc-easy-bar').style.width = (d.easySolved / d.totalEasy * 100) + '%';
+                    document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / d.totalMedium * 100) + '%';
+                    document.getElementById('lc-hard-bar').style.width = (d.hardSolved / d.totalHard * 100) + '%';
+                } else {
+                    // Fallback if we don't have total questions
+                    document.getElementById('lc-easy-bar').style.width = (d.easySolved / 800 * 100) + '%';
+                    document.getElementById('lc-medium-bar').style.width = (d.mediumSolved / 1700 * 100) + '%';
+                    document.getElementById('lc-hard-bar').style.width = (d.hardSolved / 700 * 100) + '%';
+                }
                 document.getElementById('lc-rate-bar').style.width = d.acceptanceRate + '%';
             }, 500);
         }
