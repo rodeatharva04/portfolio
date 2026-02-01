@@ -375,7 +375,7 @@
     </section>
 
     <!-- STATS (LEETCODE) -->
-    <section id="stats" class="py-12 px-4 md:px-6">
+    <section id="stats" class="py-12 px-4 md:px-6" data-leetcode-username="rodeatharva">
         <div class="max-w-6xl mx-auto">
             <div class="bento-card" data-aos="fade-up">
                 <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
@@ -835,7 +835,11 @@
 
         // LeetCode fetch function using official GraphQL API
         async function fetchLC() {
-            const username = 'rodeatharva';
+            // Get username from data attribute or fallback to profile link
+            const statsSection = document.getElementById('stats');
+            const username = statsSection?.dataset.leetcodeUsername ||
+                document.querySelector('a[href*="leetcode.com"]')?.href.split('/').pop() ||
+                'rodeatharva'; // fallback
 
             try {
                 console.log('Fetching LeetCode data using GraphQL API...');
@@ -979,9 +983,14 @@
             document.getElementById('lc-rep').innerText = d.reputation;
             document.getElementById('lc-contrib').innerText = d.contributionPoints;
 
-            let estimatedUsers = 5000000;
-            let topPercent = (d.ranking / estimatedUsers) * 100;
-            let percentText = topPercent < 1 ? "Top <1%" : `Top ${topPercent.toFixed(1)}%`;
+            // Calculate top percentile dynamically
+            const estimatedUsers = 5000000;
+            const topPercent = (d.ranking / estimatedUsers) * 100;
+            const percentText = topPercent < 0.1
+                ? `Top ${topPercent.toFixed(2)}%`
+                : topPercent < 1
+                    ? `Top ${topPercent.toFixed(1)}%`
+                    : `Top ${topPercent.toFixed(1)}%`;
             document.getElementById('lc-top-percent').innerText = percentText;
 
             const total = d.totalSolved;
